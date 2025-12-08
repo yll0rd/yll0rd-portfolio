@@ -2,8 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Download } from "lucide-react"
-import { MobileNavbar } from "@/components/mobile-navbar"
+import { Download } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import { ArrowRight as ArrowRightIcon } from "lucide-react"
 import Image from "next/image"
@@ -11,8 +10,8 @@ import { ThemeSparkles } from "@/components/ui/ThemeSparkles"
 import { ALL_LOGOS, ALL_SKILLS_ICONS } from "@/lib/constants"
 import HeroSection from "@/components/hero"
 import SkillsSection from "@/components/skills-section";
-import RevealNavbar from "@/components/ui/reveal-navbar"
 import { GravityStarsBackground } from "@/components/ui/gravity-stars-background"
+import Navbar from "@/components/navbar"
 
 export default function Page() {
   const [showMoreCerts, setShowMoreCerts] = useState(false)
@@ -155,10 +154,7 @@ export default function Page() {
       /> */}
       <div className="relative min-h-screen bg-transparent">
 
-        {/* Renders the mobile version of the navbar for small screens */}
-        <MobileNavbar />
-        {/* Renders the main animated reveal navbar for desktop screens */}
-        <RevealNavbar />
+        <Navbar />
         <div className="max-w-4xl mx-auto px-4 py-12 lg:py-16">
           {/* Hero Section */}
           <HeroSection />

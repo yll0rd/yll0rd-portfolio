@@ -30,6 +30,7 @@ const Reveal = () => {
     useEffect(() => {
         setMounted(true);
         setIsHidden(true);
+        console.log("Navbar mounted");
     }, []);
 
     useEffect(() => {
@@ -74,7 +75,7 @@ const Reveal = () => {
             // background: "white"
         },
     };
-    const sections = ["about", "skills", 
+    const sections = ["about", "skills",
         // "projects", 
         "experience", "education", "certifications"]
 
@@ -105,76 +106,78 @@ const Reveal = () => {
     const ThemeIcon = resolvedTheme === "dark" ? SunIcon : MoonIcon
 
     return (
-        mounted &&
-        <div className="h-full w-full sticky top-2 inset-0 max-lg:hidden z-[10000000000]">
-            <div
-                className="size-full"
-                onMouseEnter={() => height <= 50 && setIsHidden(false)}
-                onMouseLeave={() => height <= 50 && setIsHidden(true)}
-            >
-                <motion.nav
-                    animate={!isHidden ? "vissible" : "hidden"}
-                    initial="hidden"
-                    exit="hidden"
-                    variants={firstNavVariants}
-                    transition={{ duration: 0.25 }}
-                    className={cn(
-                        "text-foreground p-[10px] h-[65px] mx-auto overflow-hidden rounded-2xl flex items-center justify-between pr-6", {
-                        "backdrop-blur-lg bg-white border shadow-lg": height > 50 || !isHidden
-                    })}
-                    style={{
-                        width: navbarWidth,
-                    }}
+        <div
+            className="h-full w-full sticky inset-0 z-[10000000000]"
+            style={{ '--navbar-top': '1rem', top: 'var(--navbar-top)' } as React.CSSProperties}
+        >
+            {mounted && (
+                <div
+                    className="size-full"
+                    onMouseEnter={() => height <= 50 && setIsHidden(false)}
+                    onMouseLeave={() => height <= 50 && setIsHidden(true)}
                 >
-                    <motion.a
-                        animate={{
-                            height: 50,
+                    <motion.nav
+                        animate={!isHidden ? "vissible" : "hidden"}
+                        initial="hidden"
+                        exit="hidden"
+                        variants={firstNavVariants}
+                        transition={{ duration: 0.25 }}
+                        className={cn(
+                            "text-foreground p-[10px] h-[65px] mx-auto overflow-hidden rounded-2xl flex items-center justify-between", {
+                            "backdrop-blur-lg bg-white border shadow-lg": height > 50 || !isHidden
+                        })}
+                        style={{
+                            width: navbarWidth,
                         }}
-                        href="/"
-                        className="size-10 relative rounded-full max-w-[50px] min-w-[50px] flex items-center justify-center"
                     >
-                        <Image
-                            fill
-                            src="/myself.jpg"
-                            alt="Youmbi Leo"
-                            className="object-cover rounded-full size-9"
-                        />
-                    </motion.a>
-                    <div className="mr-10" />
-                    <AnimatePresence>
-                        {(height >= 0 || !isHidden) && (
-                            <>
-                                <motion.ul className="flex items-center gap-5">
-                                    {sections.map((route) => (
-                                        <motion.li
-                                            key={route}
-                                            className={`px-3 py-2 text-sm capitalize rounded-md transition-colors ${activeSection === route
-                                                ? "text-foreground font-medium underline decoration-wavy decoration-[2px] underline-offset-4"
-                                                : "text-muted-foreground font-semibold hover:text-foreground hover:bg-background/50 dark:hover:text-foreground dark:hover:bg-background/70"
-                                                }`}
-                                            onClick={() => scrollToSection(route)}
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            style={{
-                                                opacity: routesOpacity,
-                                            }}
-                                        >
-                                            {route}
-                                        </motion.li>
-                                    ))}
-                                </motion.ul>
-                                <button
-                                    onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-                                    className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-background/50 dark:hover:text-foreground dark:hover:bg-background/70 transition-colors"
-                                >
-                                    <ThemeIcon className="h-5 w-5" size={20} />
-                                </button>
-                            </>
-                        )}
-                    </AnimatePresence>
-                </motion.nav>
-            </div>
-
+                        <motion.a
+                            animate={{
+                                height: 50,
+                            }}
+                            href="/"
+                            className="size-10 relative rounded-full max-w-[50px] min-w-[50px] flex items-center justify-center"
+                        >
+                            <Image
+                                fill
+                                src="/myself.jpg"
+                                alt="Youmbi Leo"
+                                className="object-cover rounded-full size-9"
+                            />
+                        </motion.a>
+                        <AnimatePresence>
+                            {(height >= 0 || !isHidden) && (
+                                <>
+                                    <motion.ul className="flex items-center gap-5">
+                                        {sections.map((route) => (
+                                            <motion.li
+                                                key={route}
+                                                className={`px-3 py-2 text-sm capitalize rounded-md transition-colors ${activeSection === route
+                                                    ? "text-foreground font-semibold underline decoration-wavy decoration-[2px] underline-offset-4"
+                                                    : "text-muted-foreground font-medium hover:text-foreground hover:bg-background/50 dark:hover:text-foreground dark:hover:bg-background/70"
+                                                    }`}
+                                                onClick={() => scrollToSection(route)}
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                style={{
+                                                    opacity: routesOpacity,
+                                                }}
+                                            >
+                                                {route}
+                                            </motion.li>
+                                        ))}
+                                    </motion.ul>
+                                    <button
+                                        onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                                        className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-background/50 dark:hover:text-foreground dark:hover:bg-background/70 transition-colors"
+                                    >
+                                        <ThemeIcon className="h-5 w-5" size={20} />
+                                    </button>
+                                </>
+                            )}
+                        </AnimatePresence>
+                    </motion.nav>
+                </div>
+            )}
         </div>
     );
 };

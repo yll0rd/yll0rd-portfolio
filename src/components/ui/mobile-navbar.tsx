@@ -79,7 +79,7 @@ export function MobileNavbar() {
 
   return (
     // mounted &&
-    <header className={cn("sticky top-0 z-50 bg-background/30 dark:bg-background/50 lg:hidden", {
+    <header className={cn("sticky top-0 z-50 bg-background/30 dark:bg-background/50", {
       "backdrop-blur-xl border-b border-border/40": height > 50
     })}>
       <nav className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between relative">
@@ -89,20 +89,6 @@ export function MobileNavbar() {
             activeSection={activeSection}
             onSectionClick={scrollToSection}
           />
-          <div className="hidden md:flex items-center space-x-6">
-            {sections.map((section) => (
-              <button
-                key={section}
-                onClick={() => scrollToSection(section)}
-                className={`px-3 py-2 text-sm capitalize rounded-md transition-colors ${activeSection === section
-                  ? "text-foreground font-medium bg-background/50 dark:text-foreground dark:bg-background/70"
-                  : "text-muted-foreground hover:text-foreground hover:bg-background/50 dark:hover:text-foreground dark:hover:bg-background/70"
-                  }`}
-              >
-                {section}
-              </button>
-            ))}
-          </div>
         </div>
 
         <Link className="relative size-10 rounded-full block" href="/">

@@ -105,11 +105,11 @@
   }
 
   [data-theme="dark"] .dotted-background {
-    display: none;
+    visibility: hidden;
   }
 
   [data-theme="light"] .sparkles-background {
-    display: none;
+    visibility: hidden;
   }
 }
 
