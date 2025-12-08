@@ -12,6 +12,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Youmbi | Software Engineer",
   description: "Youmbi is a software engineer with a passion for building web applications and mobile apps.",
+  keywords: ['yll0rd', 'yllord', 'youmbi', 'leo', 'lordson', 'yombi', 'blockchain', 'web3', 'Next.js', 'React', 'fullstack', 'frontend', 'backend', 'cyril', 'bandolo'],
   robots: {
     index: true,
     follow: true,
