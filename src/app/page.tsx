@@ -20,104 +20,111 @@ export default function Page() {
   const [visibleCertCount, setVisibleCertCount] = useState(4)
 
   const projects = [
-    {
-      title: "Dev Toolbox",
-      description: "A collection of development tools and utilities",
-      content: "A comprehensive collection of development tools and utilities to streamline the development workflow",
-      link: "https://github.com/fernand3z/dev-toolbox",
-      technologies: [
-        { name: "Python", icon: "/icons/python-svgrepo-com.svg" },
-        { name: "Prettier", icon: "/icons/prettier-svgrepo-com.svg" },
-        { name: "Bash", icon: "/icons/bash-icon-svgrepo-com.svg" },
-        { name: "Linux", icon: "/icons/linux-svgrepo-com(1).svg" },
-        { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
-        { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
-      ]
-    },
-    {
-      title: "Update Script",
-      description: "A script for automating system updates and maintenance tasks",
-      content: "Streamlines the process of keeping your system up-to-date with automated checks and updates",
-      link: "https://github.com/fernand3z/update-script",
-      technologies: [
-        { name: "Bash", icon: "/icons/bash-icon-svgrepo-com.svg" },
-        { name: "Linux", icon: "/icons/linux-svgrepo-com(1).svg" },
-        { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
-        { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
-      ]
-    },
-    {
-      title: "Portfolio Website",
-      description: "Modern portfolio website built with Next.js and Tailwind CSS",
-      content: "A responsive and animated portfolio showcasing my projects and skills",
-      link: "https://github.com/fernand3z/portfolio",
-      technologies: [
-        { name: "Next.js", icon: "/icons/nextjs-icon-svgrepo-com.svg" },
-        { name: "React", icon: "/icons/react-svgrepo-com.svg" },
-        { name: "TypeScript", icon: "/icons/typescript-svgrepo-com.svg" },
-        { name: "Tailwind", icon: "/icons/tailwind-svgrepo-com.svg" },
-        { name: "NPM", icon: "/icons/npm.svg" },
-        { name: "Prettier", icon: "/icons/prettier-svgrepo-com.svg" },
-        { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
-        { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
-      ]
-    },
-    {
-      title: "Personal Blog Site",
-      description: "A modern blog site built with Hugo static site generator",
-      content: "Fast and minimalist blog featuring custom themes, responsive design, and markdown support",
-      link: "https://github.com/fernand3z/my-blog-site",
-      technologies: [
-        { name: "Hugo", icon: "/icons/hugo-svgrepo-com.svg" },
-        { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
-        { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
-      ]
-    },
-    {
-      title: "ytmusic Downloader",
-      description: "Python script for downloading music from YTmusic using the yt-dlp library",
-      content: "A simple Python script to download audio from YouTube videos",
-      link: "https://github.com/fernand3z/yt-music-downloader",
-      technologies: [
-        { name: "Python", icon: "/icons/python-svgrepo-com.svg" },
-        { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
-        { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
-      ]
-    },
-    {
-      title: "Devlogz Blog App",
-      description: "A React Native mobile app for my personal blog",
-      content: "Cross-platform mobile application built with React Native that provides a native app experience for my blog site with offline capabilities and push notifications",
-      link: "https://github.com/fernand3z/my-webview-app",
-      technologies: [
-        { name: "React Native", icon: "/icons/reactnative-svgrepo-com.svg" },
-        { name: "JavaScript", icon: "/icons/javascript-svgrepo-com.svg" },
-        { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
-        { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
-      ]
-    },
-    {
-      title: "Coming Soon",
-      description: "Future project planned",
-      content: "Another exciting project in the pipeline. Stay tuned for updates!",
-      status: "In Planning",
-      technologies: []
-    },
-    {
-      title: "Coming Soon",
-      description: "Future project planned",
-      content: "Another exciting project in the pipeline. Stay tuned for updates!",
-      status: "In Planning",
-      technologies: []
-    },
-    {
-      title: "Coming Soon",
-      description: "Future project planned",
-      content: "Another exciting project in the pipeline. Stay tuned for updates!",
-      status: "In Planning",
-      technologies: []
-    }
-  ];
+    // {
+    //   title: "Dev Toolbox",
+    //   description: "A collection of development tools and utilities",
+    //   content: "A comprehensive collection of development tools and utilities to streamline the development workflow",
+    //   link: "https://github.com/fernand3z/dev-toolbox",
+    //   technologies: [
+    //     { name: "Python", icon: "/icons/python-svgrepo-com.svg" },
+    //     { name: "Prettier", icon: "/icons/prettier-svgrepo-com.svg" },
+    //     { name: "Bash", icon: "/icons/bash-icon-svgrepo-com.svg" },
+    //     { name: "Linux", icon: "/icons/linux-svgrepo-com(1).svg" },
+    //     { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
+    //     { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
+    //   ]
+    // },
+    // {
+    //   title: "Update Script",
+    //   description: "A script for automating system updates and maintenance tasks",
+    //   content: "Streamlines the process of keeping your system up-to-date with automated checks and updates",
+    //   link: "https://github.com/fernand3z/update-script",
+    //   technologies: [
+    //     { name: "Bash", icon: "/icons/bash-icon-svgrepo-com.svg" },
+    //     { name: "Linux", icon: "/icons/linux-svgrepo-com(1).svg" },
+    //     { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
+    //     { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
+    //   ]
+    // },
+    // {
+    //   title: "Portfolio Website",
+    //   description: "Modern portfolio website built with Next.js and Tailwind CSS",
+    //   content: "A responsive and animated portfolio showcasing my projects and skills",
+    //   link: "https://github.com/fernand3z/portfolio",
+    //   technologies: [
+    //     { name: "Next.js", icon: "/icons/nextjs-icon-svgrepo-com.svg" },
+    //     { name: "React", icon: "/icons/react-svgrepo-com.svg" },
+    //     { name: "TypeScript", icon: "/icons/typescript-svgrepo-com.svg" },
+    //     { name: "Tailwind", icon: "/icons/tailwind-svgrepo-com.svg" },
+    //     { name: "NPM", icon: "/icons/npm.svg" },
+    //     { name: "Prettier", icon: "/icons/prettier-svgrepo-com.svg" },
+    //     { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
+    //     { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
+    //   ]
+    // },
+    // {
+    //   title: "Personal Blog Site",
+    //   description: "A modern blog site built with Hugo static site generator",
+    //   content: "Fast and minimalist blog featuring custom themes, responsive design, and markdown support",
+    //   link: "https://github.com/fernand3z/my-blog-site",
+    //   technologies: [
+    //     { name: "Hugo", icon: "/icons/hugo-svgrepo-com.svg" },
+    //     { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
+    //     { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
+    //   ]
+    // },
+    // {
+    //   title: "ytmusic Downloader",
+    //   description: "Python script for downloading music from YTmusic using the yt-dlp library",
+    //   content: "A simple Python script to download audio from YouTube videos",
+    //   link: "https://github.com/fernand3z/yt-music-downloader",
+    //   technologies: [
+    //     { name: "Python", icon: "/icons/python-svgrepo-com.svg" },
+    //     { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
+    //     { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
+    //   ]
+    // },
+    // {
+    //   title: "Devlogz Blog App",
+    //   description: "A React Native mobile app for my personal blog",
+    //   content: "Cross-platform mobile application built with React Native that provides a native app experience for my blog site with offline capabilities and push notifications",
+    //   link: "https://github.com/fernand3z/my-webview-app",
+    //   technologies: [
+    //     { name: "React Native", icon: "/icons/reactnative-svgrepo-com.svg" },
+    //     { name: "JavaScript", icon: "/icons/javascript-svgrepo-com.svg" },
+    //     { name: "Git", icon: "/icons/git-svgrepo-com.svg" },
+    //     { name: "GitHub", icon: "/icons/github-svgrepo-com.svg" }
+    //   ]
+    // },
+    // {
+    //   title: "Coming Soon",
+    //   description: "Future project planned",
+    //   content: "Another exciting project in the pipeline. Stay tuned for updates!",
+    //   status: "In Planning",
+    //   technologies: []
+    // },
+    // {
+    //   title: "Coming Soon",
+    //   description: "Future project planned",
+    //   content: "Another exciting project in the pipeline. Stay tuned for updates!",
+    //   status: "In Planning",
+    //   technologies: []
+    // },
+    // {
+    //   title: "Coming Soon",
+    //   description: "Future project planned",
+    //   content: "Another exciting project in the pipeline. Stay tuned for updates!",
+    //   status: "In Planning",
+    //   technologies: []
+    // }
+  ] as {
+    title: string;
+    description: string;
+    content: string;
+    link?: string;
+    status?: string;
+    technologies: { name: string; icon: string }[];
+  }[];
 
   const handleShowMoreProjects = () => {
     if (visibleProjectCount >= projects.length) {

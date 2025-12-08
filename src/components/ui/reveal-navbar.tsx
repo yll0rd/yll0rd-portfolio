@@ -74,7 +74,9 @@ const Reveal = () => {
             // background: "white"
         },
     };
-    const sections = ["about", "skills", "projects", "experience", "education", "certifications"]
+    const sections = ["about", "skills", 
+        // "projects", 
+        "experience", "education", "certifications"]
 
     useEffect(() => {
         const handleScroll = () => {
