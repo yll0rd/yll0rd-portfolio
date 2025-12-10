@@ -11,7 +11,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Youmbi | Software Engineer",
-  description: "Youmbi is a software engineer with a passion for building web applications and mobile apps.",
+  description: "Youmbi is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
   keywords: ['yll0rd', 'yllord', 'youmbi', 'leo', 'lordson', 'yombi', 'blockchain', 'web3', 'Next.js', 'React', 'fullstack', 'frontend', 'backend', 'cyril', 'bandolo'],
   robots: {
     index: true,
@@ -24,6 +24,44 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  openGraph: {
+    title: {
+      default: "Youmbi Leo",
+      template: "%s | Youmbi Leo",
+    },
+    description:
+      "Youmbi is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
+    url: "https://yll0rd.me",
+    siteName: 'Youmbi Leo',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: `https://yll0rd.me/myself.jpg`, // Must be an absolute URL
+        width: 800,
+        height: 600,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: {
+      default: "Youmbi Leo",
+      template: "%s | Youmbi Leo",
+    },
+    description:
+      "Youmbi is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
+    images: [
+      {
+        url: `https://yll0rd.me/myself.jpg`, // Must be an absolute URL
+        width: 800,
+        height: 600,
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://yll0rd.me"
+  },
   icons: {
     icon: [
       { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
@@ -32,7 +70,7 @@ export const metadata: Metadata = {
     apple: [
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
-    
+
     other: [
       {
         rel: 'manifest',
