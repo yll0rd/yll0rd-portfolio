@@ -29,7 +29,7 @@ export default function Page() {
         <SkillsSection className="max-w-4xl mx-auto" />
 
         {/* Projects Section */}
-        <ProjectsSection className="max-w-4xl mx-auto" />
+        <ProjectsSection className="max-w-5xl mx-auto" />
 
         {/* Experience Section */}
         <ExperienceSection className="max-w-4xl mx-auto" />

@@ -26,8 +26,10 @@ export const ALL_SKILLS_ICONS = {
 
   // Frontend Frameworks & UI
   react: '/icons/react-svgrepo-com.svg',
+  react_native: '/icons/react-svgrepo-com.svg',
+  expo: '/icons/expo.svg',
   nextjs_dark: '/icons/nextjs_icon_dark.svg',
-  nextjs: '/icons/nextjs-icon-svgrepo-com.svg',
+  nextjs: '/icons/nextjs_icon_dark.svg',
   angular: '/icons/angular.svg',
   tailwind: '/icons/tailwind-svgrepo-com.svg',
   npm: '/icons/npm.svg',

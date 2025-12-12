@@ -95,111 +95,109 @@ const ContactSection = ({ className = "" }: { className?: string }) => {
                 </p>
             </div>
 
-            <div className="container mx-auto lg:px-10">
-                <div className="animate-fade-in delay-300">
-                    <div className="border border-border rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow backdrop-blur-lg">
-                        <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                                {/* Name Field */}
-                                <FormField
-                                    control={form.control}
-                                    name="name"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormControl>
-                                                <Input
-                                                    placeholder="Your full name"
-                                                    {...field}
-                                                    disabled={isSubmitting}
-                                                    className="h-12"
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-
-                                {/* Email Field */}
-                                <FormField
-                                    control={form.control}
-                                    name="email"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormControl>
-                                                <Input
-                                                    type="email"
-                                                    placeholder="your.email@example.com"
-                                                    {...field}
-                                                    disabled={isSubmitting}
-                                                    className="h-12"
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-
-                                {/* Message Field */}
-                                <FormField
-                                    control={form.control}
-                                    name="message"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormControl>
-                                                <Textarea
-                                                    placeholder="Tell me about your project or just say hi..."
-                                                    className="min-h-[160px] resize-none"
-                                                    {...field}
-                                                    disabled={isSubmitting}
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-
-                                {/* Success Message */}
-                                {submitSuccess && (
-                                    <div className="flex items-center gap-3 p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 animate-fade-in">
-                                        <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
-                                        <p className="text-sm font-medium">
-                                            Message sent successfully! I&apos;ll get back to you soon.
-                                        </p>
-                                    </div>
-                                )}
-
-                                {/* Error Message */}
-                                {submitError && (
-                                    <div className="flex items-start gap-3 p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive animate-fade-in">
-                                        <p className="text-sm">{submitError}</p>
-                                    </div>
-                                )}
-
-                                {/* Submit Button */}
-                                <Button
-                                    type="submit"
-                                    size="lg"
-                                    disabled={isSubmitting}
-                                    className="w-full h-12 text-base font-medium hover-lift shadow-lg hover:shadow-xl transition-all"
-                                >
-                                    {isSubmitting ? (
-                                        <>
-                                            <Leapfrog
-                                                size="20"
-                                                speed={2}
-                                                color={theme === "dark" ? "black" : "white"}
+            <div className="animate-fade-in delay-300 lg:px-10">
+                <div className="border border-border rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow backdrop-blur-lg">
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                            {/* Name Field */}
+                            <FormField
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="Your full name"
+                                                {...field}
+                                                disabled={isSubmitting}
+                                                className="h-12"
                                             />
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Send className="h-5 w-5" />
-                                            Send Message
-                                        </>
-                                    )}
-                                </Button>
-                            </form>
-                        </Form>
-                    </div>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/* Email Field */}
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <Input
+                                                type="email"
+                                                placeholder="your.email@example.com"
+                                                {...field}
+                                                disabled={isSubmitting}
+                                                className="h-12"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/* Message Field */}
+                            <FormField
+                                control={form.control}
+                                name="message"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <Textarea
+                                                placeholder="Tell me about your project or just say hi..."
+                                                className="min-h-[160px] resize-none"
+                                                {...field}
+                                                disabled={isSubmitting}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/* Success Message */}
+                            {submitSuccess && (
+                                <div className="flex items-center gap-3 p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 animate-fade-in">
+                                    <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                                    <p className="text-sm font-medium">
+                                        Message sent successfully! I&apos;ll get back to you soon.
+                                    </p>
+                                </div>
+                            )}
+
+                            {/* Error Message */}
+                            {submitError && (
+                                <div className="flex items-start gap-3 p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive animate-fade-in">
+                                    <p className="text-sm">{submitError}</p>
+                                </div>
+                            )}
+
+                            {/* Submit Button */}
+                            <Button
+                                type="submit"
+                                size="lg"
+                                disabled={isSubmitting}
+                                className="w-full h-12 text-base font-medium hover-lift shadow-lg hover:shadow-xl transition-all"
+                            >
+                                {isSubmitting ? (
+                                    <>
+                                        <Leapfrog
+                                            size="20"
+                                            speed={2}
+                                            color={theme === "dark" ? "black" : "white"}
+                                        />
+                                    </>
+                                ) : (
+                                    <>
+                                        <Send className="h-5 w-5" />
+                                        Send Message
+                                    </>
+                                )}
+                            </Button>
+                        </form>
+                    </Form>
                 </div>
             </div>
         </section>
