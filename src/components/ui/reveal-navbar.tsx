@@ -107,12 +107,12 @@ const Reveal = () => {
 
     return (
         <div
-            className="h-full w-full sticky inset-0 z-[10000000000]"
+            className="w-full fixed inset-0  h-[65px] z-[10000000000]"
             style={{ '--navbar-top': '1rem', top: 'var(--navbar-top)' } as React.CSSProperties}
         >
             {mounted && (
                 <div
-                    className="size-full"
+                    className="w-full"
                     onMouseEnter={() => height <= 50 && setIsHidden(false)}
                     onMouseLeave={() => height <= 50 && setIsHidden(true)}
                 >
@@ -139,7 +139,7 @@ const Reveal = () => {
                         >
                             <Image
                                 fill
-                                src="/myself.jpg"
+                                src="/favicon.svg"
                                 alt="Youmbi Leo"
                                 className="object-cover rounded-full size-9"
                             />

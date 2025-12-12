@@ -94,8 +94,8 @@ export function MobileNavbar() {
         <Link className="relative size-10 rounded-full block" href="/">
           <Image
             fill
-            src="/myself.jpg"
-            alt="Youmbi Leo"
+            src="/favicon.svg"
+            alt="Youmbi Leo logo"
             className="object-cover rounded-full size-9"
           />
         </Link>

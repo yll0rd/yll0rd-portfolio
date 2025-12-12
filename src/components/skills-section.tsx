@@ -3,9 +3,9 @@ import React from 'react'
 import Image from "next/image"
 import { ALL_SKILLS_ICONS } from '@/lib/constants';
 
-const SkillsSection = () => {
+const SkillsSection = ({ className="" }: { className?: string }) => {
   return (
-    <section id="skills" className="mb-24 animate-fade-in">
+    <section id="skills" className={`mb-24 animate-fade-in ${className}`}>
       <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center">Skills && Technologies</h2>
       <div className="card-spotify rounded-lg p-4">
         <div className="grid grid-cols-3 lg:grid-cols-6 gap-4 md:gap-8">
