@@ -9,6 +9,7 @@ import ExperienceSection from "@/components/experience-section";
 import EducationSection from "@/components/education-section";
 import CertificatesSection from "@/components/certificates-section";
 import ProjectsSection from "@/components/projects-section";
+import ContactSection from "@/components/contact-section";
 
 export default function Page() {
   return (
@@ -38,6 +39,9 @@ export default function Page() {
 
         {/* License & Certifications Section */}
         <CertificatesSection className="max-w-4xl mx-auto" />
+
+        {/* Contact Section */}
+        <ContactSection className="max-w-4xl mx-auto" />
       </div>
     </div>
   )
