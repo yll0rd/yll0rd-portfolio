@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter } from "next/font/google";
+// @ts-ignore
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Footer } from "@/components/footer"
@@ -38,8 +39,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: `https://yll0rd.me/myself.jpg`, // Must be an absolute URL
-        width: 800,
-        height: 600,
+        width: 3050,
+        height: 3812,
+        alt: "Youmbi Leo",
       },
     ],
   },
@@ -54,8 +56,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: `https://yll0rd.me/myself.jpg`, // Must be an absolute URL
-        width: 800,
-        height: 600,
+        width: 3050,
+        height: 3812,
+        alt: "Youmbi Leo",
       },
     ],
   },
