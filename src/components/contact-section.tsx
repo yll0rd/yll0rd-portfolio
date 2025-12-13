@@ -96,7 +96,7 @@ const ContactSection = ({ className = "" }: { className?: string }) => {
             </div>
 
             <div className="animate-fade-in delay-300 lg:px-10">
-                <div className="border border-border rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow backdrop-blur-lg">
+                <div className="border border-border rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow bg-card">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                             {/* Name Field */}
