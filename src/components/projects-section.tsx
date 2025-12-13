@@ -179,169 +179,166 @@ const ProjectsSection = ({ className = "" }: { className?: string }) => {
                     A collection of projects I&apos;ve worked on <span className="text-sm text-muted-foreground">(list not completed yet)</span>.
                 </p>
             </div>
-            <div className="container mx-auto px-4">
-
-                {/* Projects Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                    {projects.slice(0, visibleProjectCount).map((project, index) => (
-                        <Card
-                            key={index}
-                            className="group flex flex-col overflow-hidden border border-border hover:border-primary/50 hover:shadow-xl transition-all duration-300 hover-lift bg-card"
-                        >
-                            {/* Project Image */}
-                            {project.type !== 'mobile' && (
-                                <div className="relative h-48 w-full overflow-hidden bg-muted">
-                                    <Image
-                                        src={project.previewImage}
-                                        alt={`${project.title} preview`}
-                                        fill
-                                        className="object-cover group-hover:scale-110 transition-transform duration-500 pointer-events-none"
-                                    />
-                                    {/* Type Badge */}
-                                    <div className="absolute top-4 left-4 flex items-center gap-2 bg-background/90 backdrop-blur-sm px-3 py-1.5 rounded-full border border-border">
-                                        {getProjectTypeIcon(project.type)}
-                                        <span className="text-xs font-medium capitalize">{project.type}</span>
-                                    </div>
-                                    {/* Private Badge */}
-                                    {project.isPrivate && (
-                                        <div className="absolute top-4 right-4 flex items-center justify-center gap-1.5 bg-amber-500/90 backdrop-blur-sm size-6 text-white">
-                                            <Lock className="size-4" />
-                                        </div>
-                                    )}
+            {/* Projects Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                {projects.slice(0, visibleProjectCount).map((project, index) => (
+                    <Card
+                        key={index}
+                        className="group flex flex-col overflow-hidden hover:shadow-xl transition-all duration-300 hover-lift bg-card"
+                    >
+                        {/* Project Image */}
+                        {project.type !== 'mobile' && (
+                            <div className="relative h-48 w-full overflow-hidden bg-muted">
+                                <Image
+                                    src={project.previewImage}
+                                    alt={`${project.title} preview`}
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-500 pointer-events-none"
+                                />
+                                {/* Type Badge */}
+                                <div className="absolute top-4 left-4 flex items-center gap-2 bg-background/90 backdrop-blur-sm px-3 py-1.5 rounded-full border border-border">
+                                    {getProjectTypeIcon(project.type)}
+                                    <span className="text-xs font-medium capitalize">{project.type}</span>
                                 </div>
-                            )}
-
-                            {/* Mobile Project Alternative */}
-                            {project.type === 'mobile' && (
-                                <div className="relative h-48 w-full overflow-hidden bg-accent/50 flex items-center justify-center">
-                                    <div className="text-center space-y-3">
-                                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border-2 border-primary/20">
-                                            <Smartphone className="h-8 w-8 text-primary" />
-                                        </div>
-                                        <div className="flex items-center gap-2 justify-center">
-                                            <span className="text-sm font-medium">Mobile App</span>
-                                        </div>
+                                {/* Private Badge */}
+                                {project.isPrivate && (
+                                    <div className="absolute top-4 right-4 flex items-center justify-center gap-1.5 bg-amber-500/90 backdrop-blur-sm size-6 text-white">
+                                        <Lock className="size-4" />
                                     </div>
-                                    {project.isPrivate && (
-                                        <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-amber-500/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-white">
-                                            <Lock className="h-3 w-3" />
-                                            <span className="text-xs font-medium">Private</span>
-                                        </div>
-                                    )}
+                                )}
+                            </div>
+                        )}
+
+                        {/* Mobile Project Alternative */}
+                        {project.type === 'mobile' && (
+                            <div className="relative h-48 w-full overflow-hidden bg-accent/50 flex items-center justify-center">
+                                <div className="text-center space-y-3">
+                                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border-2 border-primary/20">
+                                        <Smartphone className="h-8 w-8 text-primary" />
+                                    </div>
+                                    <div className="flex items-center gap-2 justify-center">
+                                        <span className="text-sm font-medium">Mobile App</span>
+                                    </div>
                                 </div>
-                            )}
+                                {project.isPrivate && (
+                                    <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-amber-500/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-white">
+                                        <Lock className="h-3 w-3" />
+                                        <span className="text-xs font-medium">Private</span>
+                                    </div>
+                                )}
+                            </div>
+                        )}
 
-                            <CardHeader className="pb-4">
-                                <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
-                                    {project.title}
-                                </CardTitle>
-                                <CardDescription className="text-sm leading-relaxed line-clamp-2">
-                                    {project.description}
-                                </CardDescription>
-                            </CardHeader>
+                        <CardHeader className="pb-4">
+                            <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
+                                {project.title}
+                            </CardTitle>
+                            <CardDescription className="text-sm leading-relaxed line-clamp-2">
+                                {project.description}
+                            </CardDescription>
+                        </CardHeader>
 
-                            <CardContent className="pb-4 flex-grow">
-                                {/* Technologies */}
-                                {project.technologies && project.technologies.length > 0 && (
-                                    <div className="space-y-2">
-                                        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                                            Tech Stack
-                                        </p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.technologies.map((tech, techIndex) => (
-                                                <div
-                                                    key={techIndex}
-                                                    className="relative group/tech"
-                                                >
-                                                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-accent/50 border border-border hover:border-primary/50 transition-colors">
-                                                        <Image
-                                                            src={tech.icon}
-                                                            alt={`${tech.name} icon`}
-                                                            width={16}
-                                                            height={16}
-                                                            className="w-4 h-4"
-                                                        />
-                                                        <span className="text-xs font-medium">{tech.name}</span>
-                                                    </div>
+                        <CardContent className="pb-4 flex-grow">
+                            {/* Technologies */}
+                            {project.technologies && project.technologies.length > 0 && (
+                                <div className="space-y-2">
+                                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                        Tech Stack
+                                    </p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {project.technologies.map((tech, techIndex) => (
+                                            <div
+                                                key={techIndex}
+                                                className="relative group/tech"
+                                            >
+                                                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-accent/50 border border-border hover:border-primary/50 transition-colors">
+                                                    <Image
+                                                        src={tech.icon}
+                                                        alt={`${tech.name} icon`}
+                                                        width={16}
+                                                        height={16}
+                                                        className="w-4 h-4"
+                                                    />
+                                                    <span className="text-xs font-medium">{tech.name}</span>
                                                 </div>
-                                            ))}
-                                        </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                )}
-                            </CardContent>
-
-                            <CardFooter className="pt-4 border-t border-border flex gap-2">
-                                {/* Live Link */}
-                                {project.liveLink && (
-                                    <Button
-                                        asChild
-                                        variant="default"
-                                        size="sm"
-                                        className="flex-1 group/btn"
-                                    >
-                                        <a
-                                            href={project.liveLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            <ExternalLink className="mr-2 h-4 w-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                                            Live Demo
-                                        </a>
-                                    </Button>
-                                )}
-
-                                {/* GitHub Link */}
-                                {!project.isPrivate && 'githubLink' in project && (
-                                    <Button
-                                        asChild
-                                        variant="outline"
-                                        size="sm"
-                                        className={project.liveLink ? "px-3" : "flex-1"}
-                                    >
-                                        <a
-                                            href={project.githubLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            aria-label="View on GitHub"
-                                        >
-                                            <Github className="h-4 w-4" />
-                                            {!project.liveLink && <span className="ml-2">Source Code</span>}
-                                        </a>
-                                    </Button>
-                                )}
-                            </CardFooter>
-                        </Card>
-                    ))}
-                </div>
-
-                {/* Show More/Less Button */}
-                {projects.length > 6 && (
-                    <div className="flex justify-center">
-                        <Button
-                            onClick={handleShowMoreProjects}
-                            variant="outline"
-                            size="lg"
-                            className="group px-8"
-                        >
-                            {showingAllProjects ? (
-                                <>
-                                    Show Less
-                                    <span className="ml-2 transform rotate-180 group-hover:-translate-y-0.5 transition-transform">
-                                        ↓
-                                    </span>
-                                </>
-                            ) : (
-                                <>
-                                    Show More Projects
-                                    <span className="ml-2 group-hover:translate-y-0.5 transition-transform">
-                                        ↓
-                                    </span>
-                                </>
+                                </div>
                             )}
-                        </Button>
-                    </div>
-                )}
+                        </CardContent>
+
+                        <CardFooter className="pt-4 border-t border-border flex gap-2">
+                            {/* Live Link */}
+                            {project.liveLink && (
+                                <Button
+                                    asChild
+                                    variant="default"
+                                    size="sm"
+                                    className="flex-1 group/btn"
+                                >
+                                    <a
+                                        href={project.liveLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <ExternalLink className="mr-2 h-4 w-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                                        Live Demo
+                                    </a>
+                                </Button>
+                            )}
+
+                            {/* GitHub Link */}
+                            {!project.isPrivate && 'githubLink' in project && (
+                                <Button
+                                    asChild
+                                    variant="outline"
+                                    size="sm"
+                                    className={project.liveLink ? "px-3" : "flex-1"}
+                                >
+                                    <a
+                                        href={project.githubLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="View on GitHub"
+                                    >
+                                        <Github className="h-4 w-4" />
+                                        {!project.liveLink && <span className="ml-2">Source Code</span>}
+                                    </a>
+                                </Button>
+                            )}
+                        </CardFooter>
+                    </Card>
+                ))}
             </div>
+
+            {/* Show More/Less Button */}
+            {projects.length > 6 && (
+                <div className="flex justify-center">
+                    <Button
+                        onClick={handleShowMoreProjects}
+                        variant="outline"
+                        size="lg"
+                        className="group px-8"
+                    >
+                        {showingAllProjects ? (
+                            <>
+                                Show Less
+                                <span className="ml-2 transform rotate-180 group-hover:-translate-y-0.5 transition-transform">
+                                    ↓
+                                </span>
+                            </>
+                        ) : (
+                            <>
+                                Show More Projects
+                                <span className="ml-2 group-hover:translate-y-0.5 transition-transform">
+                                    ↓
+                                </span>
+                            </>
+                        )}
+                    </Button>
+                </div>
+            )}
         </section>
     )
 }

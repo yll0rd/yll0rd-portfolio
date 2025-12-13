@@ -26,22 +26,22 @@ export default function Page() {
         <HeroSection className="max-w-7xl mx-auto" />
 
         {/* Skills Section */}
-        <SkillsSection className="max-w-4xl mx-auto" />
+        <SkillsSection className="max-w-5xl mx-auto" />
 
         {/* Projects Section */}
         <ProjectsSection className="max-w-5xl mx-auto" />
 
         {/* Experience Section */}
-        <ExperienceSection className="max-w-4xl mx-auto" />
+        <ExperienceSection className="max-w-5xl mx-auto" />
 
         {/* Education Section */}
-        <EducationSection className="max-w-4xl mx-auto" />
+        <EducationSection className="max-w-5xl mx-auto" />
 
         {/* License & Certifications Section */}
-        <CertificatesSection className="max-w-4xl mx-auto" />
+        <CertificatesSection className="max-w-5xl mx-auto" />
 
         {/* Contact Section */}
-        <ContactSection className="max-w-4xl mx-auto" />
+        <ContactSection className="max-w-5xl mx-auto" />
       </div>
     </div>
   )
