@@ -17,9 +17,7 @@ export function MobileNavbar() {
   const lastYRef = React.useRef(0);
   const [activeSection, setActiveSection] = React.useState("about")
 
-  const sections = ["about", "skills", 
-    // "projects", 
-    "experience", "education", "certifications"]
+  const sections = ["about", "skills", "projects", "experience", "education", "certifications"]
 
   // Handle mounting separately from scroll effects
   React.useEffect(() => {
