@@ -257,7 +257,7 @@ const ProjectsSection = ({ className = "" }: { className?: string }) => {
                                                         alt={`${tech.name} icon`}
                                                         width={16}
                                                         height={16}
-                                                        className="w-4 h-4"
+                                                        className="size-4 sm:grayscale group-hover:grayscale-0 transition-all"
                                                     />
                                                     <span className="text-xs font-medium">{tech.name}</span>
                                                 </div>

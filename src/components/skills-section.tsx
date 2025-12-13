@@ -8,7 +8,7 @@ const SkillsSection = ({ className="" }: { className?: string }) => {
     <section id="skills" className={`mb-24 animate-fade-in ${className}`}>
       <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center">Skills && Technologies</h2>
       <div className="card-spotify rounded-lg p-4">
-        <div className="grid grid-cols-3 lg:grid-cols-6 gap-4 md:gap-8">
+        <div className="grid grid-cols-3 lg:grid-cols-6 gap-4 md:gap-8 group">
           {/* Column 1 - Programming Languages */}
           <div className="animate-slide-in delay-100">
             <div className="space-y-2 md:space-y-4">
@@ -27,7 +27,7 @@ const SkillsSection = ({ className="" }: { className?: string }) => {
                     alt={`${tech.name} icon`}
                     width={20}
                     height={20}
-                    className="w-5 h-5"
+                    className="size-5 grayscale group-hover:grayscale-0 transition-all"
                   />
                   <span className="text-xs md:text-sm font-medium text-foreground">{tech.name}</span>
                 </div>
@@ -54,7 +54,7 @@ const SkillsSection = ({ className="" }: { className?: string }) => {
                     alt={`${tech.name} icon`}
                     width={20}
                     height={20}
-                    className="w-5 h-5"
+                    className="size-5 grayscale group-hover:grayscale-0 transition-all"
                   />
                   <span className="text-xs md:text-sm font-medium text-foreground">{tech.name}</span>
                 </div>
@@ -81,7 +81,7 @@ const SkillsSection = ({ className="" }: { className?: string }) => {
                     alt={`${tech.name} icon`}
                     width={20}
                     height={20}
-                    className="w-5 h-5"
+                    className="size-5 grayscale group-hover:grayscale-0 transition-all"
                   />
                   <span className="text-xs md:text-sm font-medium text-foreground">{tech.name}</span>
                 </div>
@@ -107,7 +107,7 @@ const SkillsSection = ({ className="" }: { className?: string }) => {
                     alt={`${tech.name} icon`}
                     width={20}
                     height={20}
-                    className="w-5 h-5"
+                    className="size-5 grayscale group-hover:grayscale-0 transition-all"
                   />
                   <span className="text-xs md:text-sm font-medium text-foreground">{tech.name}</span>
                 </div>
@@ -132,7 +132,7 @@ const SkillsSection = ({ className="" }: { className?: string }) => {
                     alt={`${tech.name} icon`}
                     width={20}
                     height={20}
-                    className="w-5 h-5"
+                    className="size-5 grayscale group-hover:grayscale-0 transition-all"
                   />
                   <span className="text-xs md:text-sm font-medium text-foreground">{tech.name}</span>
                 </div>
@@ -157,7 +157,7 @@ const SkillsSection = ({ className="" }: { className?: string }) => {
                     alt={`${tech.name} icon`}
                     width={20}
                     height={20}
-                    className="w-5 h-5"
+                    className="size-5 grayscale group-hover:grayscale-0 transition-all"
                   />
                   <span className="text-xs md:text-sm font-medium text-foreground">{tech.name}</span>
                 </div>
