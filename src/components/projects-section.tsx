@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Lock, Monitor, Smartphone, Laptop } from "lucide-react";
+import { ExternalLink, Monitor, Smartphone, Laptop } from "lucide-react";
+import { GitHubLogoIcon as Github, LockClosedIcon as Lock } from "@radix-ui/react-icons"
 import { ALL_SKILLS_ICONS } from '@/lib/constants';
 
 type Project = {
@@ -22,6 +23,19 @@ type Project = {
 
 
 const projects = ([
+    {
+        title: "Wise App",
+        description: "A digital healthcare platform built to connect hospitals, healthcare providers, and communities in Cameroon through remote consultations, appointment management",
+        type: "web",
+        isPrivate: true,
+        previewImage: "/screenshots/wiseapp-cover.png",
+        liveLink: "https://app.wisecool.org/",
+        technologies: [
+            { name: "nextjs", icon: ALL_SKILLS_ICONS.nextjs },
+            { name: "expressjs", icon: ALL_SKILLS_ICONS.express },
+            { name: "Vercel", icon: ALL_SKILLS_ICONS.vercel },
+        ]
+    },
     {
         title: "Kinya",
         description: "A web application built to help tourists, internationals, and anyone interested in learning the Kinyarwanda language",
@@ -190,9 +204,8 @@ const ProjectsSection = ({ className = "" }: { className?: string }) => {
                                     </div>
                                     {/* Private Badge */}
                                     {project.isPrivate && (
-                                        <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-amber-500/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-white">
-                                            <Lock className="h-3 w-3" />
-                                            <span className="text-xs font-medium">Private</span>
+                                        <div className="absolute top-4 right-4 flex items-center justify-center gap-1.5 bg-amber-500/90 backdrop-blur-sm size-6 text-white">
+                                            <Lock className="size-4" />
                                         </div>
                                     )}
                                 </div>

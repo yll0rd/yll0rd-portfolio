@@ -149,7 +149,7 @@ const Reveal = () => {
                                         {sections.map((route) => (
                                             <motion.li
                                                 key={route}
-                                                className={`px-3 py-2 text-sm capitalize rounded-md transition-colors ${activeSection === route
+                                                className={`px-3 py-2 text-sm capitalize rounded-md transition-colors  cursor-pointer ${activeSection === route
                                                     ? "text-foreground font-semibold underline decoration-wavy decoration-[2px] underline-offset-4"
                                                     : "text-muted-foreground font-medium hover:text-foreground hover:bg-background/50 dark:hover:text-foreground dark:hover:bg-background/70"
                                                     }`}

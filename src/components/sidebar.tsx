@@ -27,7 +27,7 @@ export function Sidebar({ sections, activeSection, onSectionClick }: SidebarProp
             <SheetClose key={section} asChild>
               <button
                 onClick={() => onSectionClick(section)}
-                className={`w-full text-left px-4 py-2 text-sm capitalize rounded-md transition-colors ${
+                className={`w-full text-left px-4 py-2 text-sm capitalize rounded-md transition-colors cursor-pointer ${
                   activeSection === section
                     ? "text-foreground font-medium bg-background/50 dark:text-foreground dark:bg-background/70"
                     : "text-muted-foreground hover:text-foreground hover:bg-background/50 dark:hover:text-foreground dark:hover:bg-background/70"
