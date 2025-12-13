@@ -42,7 +42,7 @@ export const SparklesCore = (props: ParticlesProps) => {
   const particlesLoaded = async (container?: Container) => {
     if (container) {
       controls.start({
-        opacity: 0.8,
+        opacity: 0.3,
         transition: {
           duration: 1,
         },
@@ -235,7 +235,7 @@ export const SparklesCore = (props: ParticlesProps) => {
               opacity: {
                 value: {
                   min: 0.1,
-                  max: 0.8,
+                  max: 0.3,
                 },
                 animation: {
                   count: 0,
@@ -338,12 +338,12 @@ export const SparklesCore = (props: ParticlesProps) => {
                 lines: {
                   enable: false,
                   frequency: 0.05,
-                  opacity: 1,
+                  opacity: 0.3,
                 },
                 particles: {
                   enable: false,
                   frequency: 0.05,
-                  opacity: 1,
+                  opacity: 0.3,
                 },
               },
               wobble: {
@@ -386,7 +386,7 @@ export const SparklesCore = (props: ParticlesProps) => {
                   sync: false,
                 },
                 enable: false,
-                opacity: 1,
+                opacity: 0.3,
                 rotation: {
                   value: 45,
                 },
@@ -401,7 +401,7 @@ export const SparklesCore = (props: ParticlesProps) => {
                 distance: 100,
                 enable: false,
                 frequency: 1,
-                opacity: 1,
+                opacity: 0.3,
                 shadow: {
                   blur: 5,
                   color: {
