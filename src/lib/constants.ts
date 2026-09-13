@@ -3,7 +3,7 @@ export const ALL_LOGOS = {
   github: '/github-logo.png',
   irembo: '/rwandaonline_platform_limited_logo.jpeg',
   skaleway: '/skaleway-logo.jpeg',
-  africanLeadershipExperience: 'https://media.licdn.com/dms/image/v2/D4D0BAQHLsEYN-JXdlQ/company-logo_100_100/company-logo_100_100/0/1725265718170/african_leadership_experience_logo?e=1766620800&v=beta&t=GyOm8WuBauaqmagkq1u5QKtDbda_BxwlOSQhxlo2K7I',
+  africanLeadershipExperience: '/african_leadership_experience_logo.jpg',
   uclan: '/uclan-logo.jpg',
   nahpi: '/nahpi-logo.png',
   freeCodeCamp: '/free_code_camp_logo.jpeg',

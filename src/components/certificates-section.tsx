@@ -9,7 +9,7 @@ const certificates = [
         date: "2024",
         link: "https://www.udemy.com/certificate/UC-fb43df2f-3568-4e64-a709-d1b598824bc0/",
         providers: [
-            { name: "Udemy", url: "https://udemy.com", icon: "https://media.licdn.com/dms/image/v2/D560BAQEf_NHzN2yVQg/company-logo_100_100/company-logo_100_100/0/1723593046388/udemy_logo?e=1766620800&v=beta&t=MDQ91-Gf8dlhTSsAgM0g5Dl4-busATcAugZqMixev3A" },
+            { name: "Udemy", url: "https://udemy.com", icon: "/udemy-logo.svg" },
         ]
     },
     {
@@ -40,7 +40,7 @@ const certificates = [
         date: "Dec 2023",
         link: "https://www.udemy.com/certificate/UC-6f551155-00ef-48d0-8115-018ae2604df8/",
         providers: [
-            { name: "Udemy", url: "https://udemy.com", icon: "https://media.licdn.com/dms/image/v2/D560BAQEf_NHzN2yVQg/company-logo_100_100/company-logo_100_100/0/1723593046388/udemy_logo?e=1766620800&v=beta&t=MDQ91-Gf8dlhTSsAgM0g5Dl4-busATcAugZqMixev3A" },
+            { name: "Udemy", url: "https://udemy.com", icon: "/udemy-logo.svg" },
         ]
     },
     {

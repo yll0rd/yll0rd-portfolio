@@ -11,8 +11,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Youmbi | Software Engineer",
-  description: "Youmbi is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
+  title: "Youmbi Leo | Software Engineer",
+  description: "Leo is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
   keywords: ['yll0rd', 'yllord', 'youmbi', 'leo', 'lordson', 'yombi', 'blockchain', 'web3', 'Next.js', 'React', 'fullstack', 'frontend', 'backend', 'cyril', 'bandolo'],
   robots: {
     index: true,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
       template: "%s | Youmbi Leo",
     },
     description:
-      "Youmbi is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
+      "Leo is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
     url: "https://yll0rd.me",
     siteName: 'Youmbi Leo',
     locale: 'en_US',
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
       template: "%s | Youmbi Leo",
     },
     description:
-      "Youmbi is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
+      "Leo is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
     images: [
       {
         url: `https://yll0rd.me/myself.jpg`, // Must be an absolute URL
