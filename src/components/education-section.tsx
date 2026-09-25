@@ -5,7 +5,7 @@ import { ALL_LOGOS } from "@/lib/constants";
 
 const EducationSection = ({ className="" }: { className?: string }) => {
     return (
-        <section id="education" className={`mb-24 animate-fade-in ${className}`}>
+        <section id="education" className={`mb-24 ${className}`}>
             <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center">Knowledge Acquisition</h2>
             <div className="space-y-6">
 

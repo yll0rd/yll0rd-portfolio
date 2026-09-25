@@ -5,7 +5,7 @@ import { ALL_LOGOS, ALL_SKILLS_ICONS } from "@/lib/constants"
 
 const ExperienceSection = ({ className="" }: { className?: string }) => {
     return (
-        <section id="experience" className={`mb-24 animate-fade-in ${className}`}>
+        <section id="experience" className={`mb-24 ${className}`}>
             <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center">Professional Background</h2>
             <div className="space-y-8">
 

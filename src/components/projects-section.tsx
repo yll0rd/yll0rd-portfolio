@@ -170,7 +170,7 @@ const ProjectsSection = ({ className = "" }: { className?: string }) => {
     const showingAllProjects = visibleProjectCount >= projects.length;
 
     return (
-        <section id="projects" className={`animate-fade-in mb-24 ${className}`}>
+        <section id="projects" className={`mb-24 ${className}`}>
 
             {/* Header */}
             <div className="text-center mb-12 space-y-2">

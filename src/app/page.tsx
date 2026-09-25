@@ -10,6 +10,7 @@ import EducationSection from "@/components/education-section";
 import CertificatesSection from "@/components/certificates-section";
 import ProjectsSection from "@/components/projects-section";
 import ContactSection from "@/components/contact-section";
+import AnimatedSection from "@/components/ui/animated-section";
 
 export default function Page() {
   return (
@@ -26,22 +27,34 @@ export default function Page() {
         <HeroSection className="max-w-7xl mx-auto" />
 
         {/* Skills Section */}
-        <SkillsSection className="max-w-5xl mx-auto" />
+        <AnimatedSection>
+          <SkillsSection className="max-w-5xl mx-auto" />
+        </AnimatedSection>
 
         {/* Projects Section */}
-        <ProjectsSection className="max-w-5xl mx-auto" />
+        <AnimatedSection>
+          <ProjectsSection className="max-w-5xl mx-auto" />
+        </AnimatedSection>
 
         {/* Experience Section */}
-        <ExperienceSection className="max-w-5xl mx-auto" />
+        <AnimatedSection>
+          <ExperienceSection className="max-w-5xl mx-auto" />
+        </AnimatedSection>
 
         {/* Education Section */}
-        <EducationSection className="max-w-5xl mx-auto" />
+        <AnimatedSection>
+          <EducationSection className="max-w-5xl mx-auto" />
+        </AnimatedSection>
 
         {/* License & Certifications Section */}
-        <CertificatesSection className="max-w-5xl mx-auto" />
+        <AnimatedSection>
+          <CertificatesSection className="max-w-5xl mx-auto" />
+        </AnimatedSection>
 
         {/* Contact Section */}
-        <ContactSection className="max-w-5xl mx-auto" />
+        <AnimatedSection>
+          <ContactSection className="max-w-5xl mx-auto" />
+        </AnimatedSection>
       </div>
     </div>
   )

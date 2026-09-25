@@ -86,7 +86,7 @@ const ContactSection = ({ className = "" }: { className?: string }) => {
     };
 
     return (
-        <section id='contact' className={`animate-fade-in ${className}`}>
+        <section id='contact' className={className}>
             {/* Header */}
             <div className="text-center mb-12 space-y-2">
                 <h2 className="text-2xl md:text-3xl font-bold">Get In Touch</h2>
