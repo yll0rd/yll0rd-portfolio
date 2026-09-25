@@ -24,6 +24,15 @@ export const ALL_SKILLS_ICONS = {
   html: '/icons/html-5-svgrepo-com.svg',
   css: '/icons/css-svgrepo-com.svg',
 
+  // AI & Machine Learning
+  pytorch: '/icons/pytorch.svg',
+  tensorflow: '/icons/tensorflow.svg',
+  scikitlearn: '/icons/scikitlearn.svg',
+  pandas: '/icons/pandas.svg',
+  numpy: '/icons/numpy.svg',
+  huggingface: '/icons/huggingface.svg',
+  ollama: '/icons/ollama.svg',
+
   // Frontend Frameworks & UI
   react: '/icons/react-svgrepo-com.svg',
   react_native: '/icons/react-svgrepo-com.svg',

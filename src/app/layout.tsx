@@ -11,9 +11,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Youmbi Leo | Software Engineer",
-  description: "Leo is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
-  keywords: ['yll0rd', 'yllord', 'youmbi', 'leo', 'lordson', 'yombi', 'blockchain', 'web3', 'Next.js', 'React', 'fullstack', 'frontend', 'backend', 'cyril', 'bandolo'],
+  title: "Youmbi Leo | AI/ML Engineer",
+  description: "Youmbi Leo is an AI/ML engineer with a full-stack background, building machine learning models and LLM-powered applications that ship in real products.",
+  keywords: ['yll0rd', 'yllord', 'youmbi', 'leo', 'lordson', 'yombi', 'AI engineer', 'machine learning engineer', 'ML engineer', 'LLM', 'generative AI', 'PyTorch', 'Python', 'Next.js', 'React', 'fullstack', 'cyril', 'bandolo'],
   robots: {
     index: true,
     follow: true,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
       template: "%s | Youmbi Leo",
     },
     description:
-      "Leo is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
+      "Youmbi Leo is an AI/ML engineer with a full-stack background, building machine learning models and LLM-powered applications that ship in real products.",
     url: "https://yll0rd.me",
     siteName: 'Youmbi Leo',
     locale: 'en_US',
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
       template: "%s | Youmbi Leo",
     },
     description:
-      "Leo is a software engineer who loves creating web and mobile apps, and is keenly interested in developing innovative blockchain dApps.",
+      "Youmbi Leo is an AI/ML engineer with a full-stack background, building machine learning models and LLM-powered applications that ship in real products.",
     images: [
       {
         url: `https://yll0rd.me/myself.jpg`, // Must be an absolute URL

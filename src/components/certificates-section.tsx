@@ -19,7 +19,7 @@ const certificates = [
         date: "2026",
         link: "https://www.udemy.com/certificate/UC-32fa1420-215a-4c0f-a216-4cbec98e7968/",
         providers: [
-            { name: "Udemy", url: "https://udemy.com", icon: "/udemy-logo.svg" },
+            { name: "Udemy", url: "https://www.udemy.com/course/python-machine-learning-from-beginner-to-pro/", icon: "/udemy-logo.svg" },
         ]
     },
     {
@@ -29,7 +29,7 @@ const certificates = [
         date: "2024",
         link: "https://www.udemy.com/certificate/UC-fb43df2f-3568-4e64-a709-d1b598824bc0/",
         providers: [
-            { name: "Udemy", url: "https://udemy.com", icon: "/udemy-logo.svg" },
+            { name: "Udemy", url: "https://www.udemy.com/course/the-complete-python-django-rest-api-development-bootcamp/", icon: "/udemy-logo.svg" },
         ]
     },
     {
@@ -50,7 +50,7 @@ const certificates = [
         date: "2025",
         link: "https://static.frontendmasters.com/ud/c/2d3b1b4a2c/CyZKLbetbW/intermediate-next-js.pdf",
         providers: [
-            { name: "Frontend Masters", url: "https://frontendmasters.com/", icon: "/frontendmasters-logo.jpeg" }
+            { name: "Frontend Masters", url: "https://master.dev/courses/intermediate-next-js/", icon: "/frontendmasters-logo.jpeg" }
         ]
     },
     {
@@ -60,7 +60,7 @@ const certificates = [
         date: "Dec 2023",
         link: "https://www.udemy.com/certificate/UC-6f551155-00ef-48d0-8115-018ae2604df8/",
         providers: [
-            { name: "Udemy", url: "https://udemy.com", icon: "/udemy-logo.svg" },
+            { name: "Udemy", url: "https://www.udemy.com/course/react-complete-developer-course-with-hands-on-projects/", icon: "/udemy-logo.svg" },
         ]
     },
     {
@@ -68,9 +68,9 @@ const certificates = [
         type: "Professional Certificate",
         issuer: "freeCodeCamp",
         date: "Sep 2023",
-        link: "https://www.freecodecamp.org/certification/Leo-Youmbi/javascript-algorithms-and-data-structures",
+        link: "https://www.freecodecamp.org/certification/yll0rd/javascript-algorithms-and-data-structures",
         providers: [
-            { name: "freeCodeCamp", url: "https://www.freecodecamp.org", icon: "/free_code_camp_logo.jpeg" }
+            { name: "freeCodeCamp", url: "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/", icon: "/free_code_camp_logo.jpeg" }
         ]
     }
 ] as const;

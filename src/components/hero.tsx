@@ -28,7 +28,7 @@ const HeroSection = ({ className = "" }: { className?: string }) => {
     }
 
     return (
-        <section id="about" className={`min-h-[calc(100vh-4rem)] flex items-center justify-center mb-24 ${className}`}>
+        <section id="about" className={`min-h-[calc(100vh-4rem)] flex items-center justify-center ${className}`}>
             <div className="container mx-auto px-4">
                 <div className="flex max-lg:flex-col lg:justify-center gap-y-12 lg:gap-x-40 items-center">
 
@@ -37,7 +37,7 @@ const HeroSection = ({ className = "" }: { className?: string }) => {
                         <div className="space-y-4">
                             <div className="inline-block">
                                 <span className="text-sm font-medium tracking-wider uppercase text-muted-foreground border border-border px-4 py-1.5 rounded-full">
-                                    Software Engineer
+                                    AI/ML Engineer
                                 </span>
                             </div>
 
@@ -55,8 +55,8 @@ const HeroSection = ({ className = "" }: { className?: string }) => {
                             </h2>
 
                             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                                Passionate software engineer with a knack for solving complex problems through code.
-                                Mostly self-taught and driven by an unyielding curiosity to explore and master new technologies.
+                                AI/ML engineer with a full-stack background. I've built LLM-powered features into real products,
+                                and I'm now focused on training and deploying machine learning models end to end. Mostly self-taught, always learning.
                             </p>
                         </div>
 
