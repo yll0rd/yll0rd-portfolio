@@ -3,6 +3,26 @@ import Image from "next/image";
 
 const certificates = [
     {
+        title: "AWS Certified AI Practitioner",
+        type: "Certification",
+        issuer: "Amazon Web Services",
+        date: "2026",
+        link: "https://www.credly.com/badges/6856faec-9ee7-4135-ac0e-68b8ecd5f13a/public_url",
+        providers: [
+            { name: "AWS", url: "https://aws.amazon.com/certification/certified-ai-practitioner/", icon: "/icons/aws-svgrepo-com.svg" },
+        ]
+    },
+    {
+        title: "Python Machine Learning: From Beginner to Pro",
+        type: "Professional Certificate",
+        issuer: "Udemy",
+        date: "2026",
+        link: "https://www.udemy.com/certificate/UC-32fa1420-215a-4c0f-a216-4cbec98e7968/",
+        providers: [
+            { name: "Udemy", url: "https://udemy.com", icon: "/udemy-logo.svg" },
+        ]
+    },
+    {
         title: "Python & Django REST API Bootcamp - Build A Python Web API",
         type: "Professional Certificate",
         issuer: "Udemy",
@@ -55,19 +75,20 @@ const certificates = [
     }
 ] as const;
 
+const CERTS_PER_PAGE = 4;
+
 const CertificatesSection = ({ className="" }: { className?: string }) => {
-    const [showMoreCerts, setShowMoreCerts] = useState(false);
-    const [visibleCertCount, setVisibleCertCount] = useState(4);
+    const [visibleCertCount, setVisibleCertCount] = useState(CERTS_PER_PAGE);
+
+    const showingAllCerts = visibleCertCount >= certificates.length;
 
     const handleShowMoreCerts = () => {
-        if (visibleCertCount >= 12) { // Total number of certificates
-            setVisibleCertCount(4) // Reset to initial count
-        } else {
-            setVisibleCertCount(prev => Math.min(prev + 4, 12))
-        }
+        setVisibleCertCount(prev => Math.min(prev + CERTS_PER_PAGE, certificates.length))
     }
 
-    const showingAllCerts = visibleCertCount >= 12;
+    const handleShowLessCerts = () => {
+        setVisibleCertCount(CERTS_PER_PAGE)
+    }
 
     return (
         <section id="certifications" className={`animate-fade-in mb-24 ${className}`}>
@@ -125,7 +146,7 @@ const CertificatesSection = ({ className="" }: { className?: string }) => {
                 </div>
 
                 {/* Show More/Less Certificates Button */}
-                {visibleCertCount < 12 && (
+                {!showingAllCerts && (
                     <div className="flex justify-center">
                         <button
                             onClick={handleShowMoreCerts}
@@ -140,10 +161,10 @@ const CertificatesSection = ({ className="" }: { className?: string }) => {
                 )}
 
                 {/* Show Less Button - only visible when all certificates are shown */}
-                {showingAllCerts && (
+                {showingAllCerts && certificates.length > CERTS_PER_PAGE && (
                     <div className="flex justify-center">
                         <button
-                            onClick={handleShowMoreCerts}
+                            onClick={handleShowLessCerts}
                             className="text-muted-foreground hover:text-foreground inline-flex items-center space-x-2 transition-colors group"
                         >
                             <div className="flex items-center space-x-2 group-hover:translate-y-[-2px] transition-transform duration-200">

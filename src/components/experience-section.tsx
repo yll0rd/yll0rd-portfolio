@@ -39,7 +39,7 @@ const ExperienceSection = ({ className="" }: { className?: string }) => {
                                     <CardTitle>Irembo</CardTitle>
                                 </a>
                                 <CardDescription>
-                                    <span className="block text-muted-foreground">Internship · 6 months</span>
+                                    <span className="block text-muted-foreground">Internship · 7 months</span>
                                     <span className="block text-sm text-muted-foreground/60">Nyarutarama, Rwanda · Onsite</span>
                                 </CardDescription>
                             </div>

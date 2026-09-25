@@ -30,7 +30,7 @@ const EducationSection = ({ className="" }: { className?: string }) => {
                             </div>
                             <div>
                                 <a
-                                    href="https://www.linkedin.com/school/vtasrilanka"
+                                    href="https://www.linkedin.com/school/104648904"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="hover:text-primary transition-colors"
@@ -115,10 +115,7 @@ const EducationSection = ({ className="" }: { className?: string }) => {
                                 </a>
                                 <CardDescription>
                                     <span className="block text-muted-foreground">University of Bamenda</span>
-                                    <span className="block text-sm text-muted-foreground/60">In Progress</span>
-                                    <span className="inline-flex items-center px-2.5 py-0.5 mt-2 rounded-full text-xs font-medium bg-success/10 text-success">
-                                        Currently Studying
-                                    </span>
+                                    <span className="block text-sm text-muted-foreground/60">Oct 2022 - Jun 2026</span>
                                 </CardDescription>
                             </div>
                         </div>
