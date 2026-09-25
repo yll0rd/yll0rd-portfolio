@@ -102,7 +102,7 @@ const ExperienceSection = ({ className="" }: { className?: string }) => {
                             </div>
                             <div className="flex-grow">
                                 <a
-                                    href="https://www.linkedin.com/company/9308653"
+                                    href="https://www.linkedin.com/company/98563279"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="hover:text-primary transition-colors"

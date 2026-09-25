@@ -1,7 +1,24 @@
 import React, { useState } from 'react';
 import Image from "next/image";
 
-const certificates = [
+type Provider = {
+    name: string;
+    url: string;
+    icon: string;
+    /** Optional variant for dark mode, for logos that disappear on dark backgrounds */
+    darkIcon?: string;
+};
+
+type Certificate = {
+    title: string;
+    type: string;
+    issuer: string;
+    date: string;
+    link: string;
+    providers: Provider[];
+};
+
+const certificates: Certificate[] = [
     {
         title: "AWS Certified AI Practitioner",
         type: "Certification",
@@ -9,7 +26,7 @@ const certificates = [
         date: "2026",
         link: "https://www.credly.com/badges/6856faec-9ee7-4135-ac0e-68b8ecd5f13a/public_url",
         providers: [
-            { name: "AWS", url: "https://aws.amazon.com/certification/certified-ai-practitioner/", icon: "/icons/aws-svgrepo-com.svg" },
+            { name: "AWS", url: "https://aws.amazon.com/certification/certified-ai-practitioner/", icon: "/icons/aws-svgrepo-com.svg", darkIcon: "/icons/aws-svgrepo-com_dark.svg" },
         ]
     },
     {
@@ -19,7 +36,7 @@ const certificates = [
         date: "2026",
         link: "https://www.udemy.com/certificate/UC-32fa1420-215a-4c0f-a216-4cbec98e7968/",
         providers: [
-            { name: "Udemy", url: "https://www.udemy.com/course/python-machine-learning-from-beginner-to-pro/", icon: "/udemy-logo.svg" },
+            { name: "Udemy", url: "https://www.udemy.com/course/python-machine-learning-from-beginner-to-pro/", icon: "/udemy-logo.svg", darkIcon: "/udemy-logo-dark.svg" },
         ]
     },
     {
@@ -29,7 +46,7 @@ const certificates = [
         date: "2024",
         link: "https://www.udemy.com/certificate/UC-fb43df2f-3568-4e64-a709-d1b598824bc0/",
         providers: [
-            { name: "Udemy", url: "https://www.udemy.com/course/the-complete-python-django-rest-api-development-bootcamp/", icon: "/udemy-logo.svg" },
+            { name: "Udemy", url: "https://www.udemy.com/course/the-complete-python-django-rest-api-development-bootcamp/", icon: "/udemy-logo.svg", darkIcon: "/udemy-logo-dark.svg" },
         ]
     },
     {
@@ -60,7 +77,7 @@ const certificates = [
         date: "Dec 2023",
         link: "https://www.udemy.com/certificate/UC-6f551155-00ef-48d0-8115-018ae2604df8/",
         providers: [
-            { name: "Udemy", url: "https://www.udemy.com/course/react-complete-developer-course-with-hands-on-projects/", icon: "/udemy-logo.svg" },
+            { name: "Udemy", url: "https://www.udemy.com/course/react-complete-developer-course-with-hands-on-projects/", icon: "/udemy-logo.svg", darkIcon: "/udemy-logo-dark.svg" },
         ]
     },
     {
@@ -73,7 +90,7 @@ const certificates = [
             { name: "freeCodeCamp", url: "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/", icon: "/free_code_camp_logo.jpeg" }
         ]
     }
-] as const;
+];
 
 const CERTS_PER_PAGE = 4;
 
@@ -128,15 +145,29 @@ const CertificatesSection = ({ className="" }: { className?: string }) => {
                                             rel="noopener noreferrer"
                                             className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity flex items-center justify-center"
                                         >
+                                            {/* Both variants are rendered and toggled with CSS, so the server
+                                                HTML matches the client regardless of the active theme */}
                                             <Image
                                                 src={provider.icon}
                                                 alt={`${provider.name} logo`}
                                                 width={24}
                                                 height={24}
-                                                className="w-6 h-6 object-contain"
+                                                className={`w-6 h-6 object-contain ${provider.darkIcon ? "dark:hidden" : ""}`}
                                                 quality={100}
                                                 unoptimized
                                             />
+                                            {provider.darkIcon && (
+                                                <Image
+                                                    src={provider.darkIcon}
+                                                    alt=""
+                                                    aria-hidden
+                                                    width={24}
+                                                    height={24}
+                                                    className="w-6 h-6 object-contain hidden dark:block"
+                                                    quality={100}
+                                                    unoptimized
+                                                />
+                                            )}
                                         </a>
                                     ))}
                                 </div>
