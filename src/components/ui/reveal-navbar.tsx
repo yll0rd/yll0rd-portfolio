@@ -96,7 +96,8 @@ const Reveal = () => {
     const scrollToSection = (sectionId: string) => {
         const element = document.getElementById(sectionId)
         if (element) {
-            element.scrollIntoView({ behavior: "smooth" })
+            const top = element.getBoundingClientRect().top + window.scrollY - 100
+            window.scrollTo({ top, behavior: "smooth" })
             setActiveSection(sectionId)
         }
     }
