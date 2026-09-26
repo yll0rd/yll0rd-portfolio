@@ -6,11 +6,11 @@ import { ALL_LOGOS, ALL_SKILLS_ICONS } from "@/lib/constants"
 const ExperienceSection = ({ className="" }: { className?: string }) => {
     return (
         <section id="experience" className={`mb-24 ${className}`}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center">Professional Background</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-12 text-left">Professional Background</h2>
             <div className="space-y-8">
 
                 {/* Irembo Experience */}
-                <Card className="hover-lift">
+                <Card className="shadow-none">
                     <CardHeader className="pb-4">
                         <div className="flex items-start gap-4">
                             <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card">
@@ -40,7 +40,7 @@ const ExperienceSection = ({ className="" }: { className?: string }) => {
                                 </a>
                                 <CardDescription>
                                     <span className="block text-muted-foreground">Internship · 7 months</span>
-                                    <span className="block text-sm text-muted-foreground/60">Nyarutarama, Rwanda · Onsite</span>
+                                    <span className="block text-sm text-muted-foreground">Nyarutarama, Rwanda · Onsite</span>
                                 </CardDescription>
                             </div>
                         </div>
@@ -48,8 +48,8 @@ const ExperienceSection = ({ className="" }: { className?: string }) => {
                     <CardContent>
                         <div className="mt-2">
                             <h4 className="text-lg font-semibold text-foreground">Software Engineer</h4>
-                            <p className="text-sm text-muted-foreground/60 mb-4">Apr 2025 - Oct 2025</p>
-                            <p className="text-muted-foreground mb-4 text-[0.75em]">
+                            <p className="text-sm text-muted-foreground mb-4">Apr 2025 - Oct 2025</p>
+                            <p className="text-muted-foreground mb-4 text-base leading-relaxed">
                                 Developed a visual Workflow Builder tool that empowers users to create, view, and edit custom workflows through an intuitive interface thereby, improving the company's internal tool. Leveraged Angular for frontend development and Spring Boot for backend services. Integrated AI-powered features utilizing local LLMs to boost user productivity and streamline workflow design.
                                 {/* Developed and maintained web applications using various technologies including Bubble.io, WordPress, and custom web development tools. Created user-friendly interfaces, integrated third-party services, and ensured optimal performance across all platforms. */}
                             </p>
@@ -81,7 +81,7 @@ const ExperienceSection = ({ className="" }: { className?: string }) => {
                 </Card>
 
                 {/* Skaleway Experience */}
-                <Card className="hover-lift">
+                <Card className="shadow-none">
                     <CardHeader className="pb-4">
                         <div className="flex items-start gap-4">
                             <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card">
@@ -110,7 +110,7 @@ const ExperienceSection = ({ className="" }: { className?: string }) => {
                                     <CardTitle>Skaleway</CardTitle>
                                 </a>
                                 <CardDescription>
-                                    <span className="block text-sm text-muted-foreground/60">Remote</span>
+                                    <span className="block text-sm text-muted-foreground">Remote</span>
                                 </CardDescription>
                             </div>
                         </div>
@@ -118,8 +118,8 @@ const ExperienceSection = ({ className="" }: { className?: string }) => {
                     <CardContent>
                         <div className="mt-2">
                             <h4 className="text-lg font-semibold text-foreground">Software Developer</h4>
-                            <p className="text-sm text-muted-foreground/60 mb-4">Jul 2024 - present</p>
-                            <p className="text-muted-foreground mb-4 text-[0.75em]">
+                            <p className="text-sm text-muted-foreground mb-4">Jul 2024 - present</p>
+                            <p className="text-muted-foreground mb-4 text-base leading-relaxed">
                                 Designed customized software solutions for clients using reliable and scalable
                                 technologies, enhancing client satisfaction and project success.
                             </p>
@@ -153,7 +153,7 @@ const ExperienceSection = ({ className="" }: { className?: string }) => {
                 </Card>
 
                 {/* TiC Foundation Experience */}
-                <Card className="hover-lift">
+                <Card className="shadow-none">
                     <CardHeader className="pb-4">
                         <div className="flex items-start gap-4">
                             <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card">
@@ -183,7 +183,7 @@ const ExperienceSection = ({ className="" }: { className?: string }) => {
                                 </a>
                                 <CardDescription>
                                     <span className="block text-muted-foreground">Internship · 6 months</span>
-                                    <span className="block text-sm text-muted-foreground/60">Yaounde, Cameroon · Hybrid</span>
+                                    <span className="block text-sm text-muted-foreground">Yaounde, Cameroon · Hybrid</span>
                                 </CardDescription>
                             </div>
                         </div>
@@ -191,8 +191,8 @@ const ExperienceSection = ({ className="" }: { className?: string }) => {
                     <CardContent>
                         <div className="mt-2">
                             <h4 className="text-lg font-semibold text-foreground">Software Developer</h4>
-                            <p className="text-sm text-muted-foreground/60 mb-4">Mar 2024 - Sep 2024</p>
-                            <p className="text-muted-foreground mb-4 text-[0.75em]">
+                            <p className="text-sm text-muted-foreground mb-4">Mar 2024 - Sep 2024</p>
+                            <p className="text-muted-foreground mb-4 text-base leading-relaxed">
                                 Developed an online portal using ReactJS, NextJS, and TypeScript for the <a href="https://ticsummit.org" target="_blank" rel="noopener noreferrer" className="font-bold">TiC Summit</a>,
                                 which empowered over 500 students to create tech solutions, enhancing innovation and
                                 entrepreneurial skills among youth in Cameroon

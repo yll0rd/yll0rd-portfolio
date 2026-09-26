@@ -6,10 +6,10 @@ import { ALL_LOGOS } from "@/lib/constants";
 const EducationSection = ({ className="" }: { className?: string }) => {
     return (
         <section id="education" className={`mb-24 ${className}`}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center">Knowledge Acquisition</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-12 text-left">Education</h2>
             <div className="space-y-6">
 
-                <Card className="hover-lift">
+                <Card className="shadow-none">
                     <CardHeader className="pb-4">
                         <div className="flex items-start gap-4">
                             <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card">
@@ -39,7 +39,7 @@ const EducationSection = ({ className="" }: { className?: string }) => {
                                 </a>
                                 <CardDescription>
                                     <span className="block text-muted-foreground">African Leadership Experience</span>
-                                    <span className="block text-sm text-muted-foreground/60">Feb 2023 - Jun 2024</span>
+                                    <span className="block text-sm text-muted-foreground">Feb 2023 - Jun 2024</span>
                                 </CardDescription>
                             </div>
                         </div>
@@ -47,7 +47,7 @@ const EducationSection = ({ className="" }: { className?: string }) => {
                 </Card>
 
                 {/* Master's Degree */}
-                {/* <Card className="hover-lift">
+                {/* <Card className="shadow-none">
                 <CardHeader className="pb-4">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card">
@@ -77,7 +77,7 @@ const EducationSection = ({ className="" }: { className?: string }) => {
                       </a>
                       <CardDescription>
                         <span className="block text-muted-foreground">University of Central Lancashire</span>
-                        <span className="block text-sm text-muted-foreground/60">Jan 2023 - Jan 2024</span>
+                        <span className="block text-sm text-muted-foreground">Jan 2023 - Jan 2024</span>
                       </CardDescription>
                     </div>
                   </div>
@@ -85,7 +85,7 @@ const EducationSection = ({ className="" }: { className?: string }) => {
               </Card> */}
 
                 {/* Bachelor's degree Course */}
-                <Card className="hover-lift">
+                <Card className="shadow-none">
                     <CardHeader className="pb-4">
                         <div className="flex items-start gap-4">
                             <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card">
@@ -115,7 +115,7 @@ const EducationSection = ({ className="" }: { className?: string }) => {
                                 </a>
                                 <CardDescription>
                                     <span className="block text-muted-foreground">University of Bamenda</span>
-                                    <span className="block text-sm text-muted-foreground/60">Oct 2022 - Jun 2026</span>
+                                    <span className="block text-sm text-muted-foreground">Oct 2022 - Jun 2026</span>
                                 </CardDescription>
                             </div>
                         </div>

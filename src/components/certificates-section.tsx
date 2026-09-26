@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import Image from "next/image";
 
@@ -109,21 +110,21 @@ const CertificatesSection = ({ className="" }: { className?: string }) => {
 
     return (
         <section id="certifications" className={`mb-24 ${className}`}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center">License && Certifications</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-12 text-left">License && Certifications</h2>
             <div className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* First 4 certificates are always visible */}
                     {/* Additional certificates are shown based on visibleCertCount */}
                     {certificates.slice(0, visibleCertCount).map((cert, index) => (
-                        <div key={index} className={`card-spotify p-4 rounded-lg hover-lift animate-scale-in delay-${(index % 4 + 1) * 100} flex flex-col`}>
+                        <div key={index} className={`card-spotify p-4 rounded-lg  animate-scale-in delay-${(index % 4 + 1) * 100} flex flex-col`}>
                             <div>
                                 <h3 className="text-xl font-bold mb-3 text-foreground">{cert.title}</h3>
                                 <div className="flex items-center gap-2 mb-2">
-                                    <p className="text-muted-foreground text-[0.6em]">{cert.type}</p>
-                                    <span className="text-muted-foreground text-[0.6em]">•</span>
-                                    <p className="text-muted-foreground text-[0.6em]">{cert.issuer}</p>
-                                    <span className="text-muted-foreground text-[0.6em]">•</span>
-                                    <p className="text-muted-foreground text-[0.6em]">{cert.date}</p>
+                                    <p className="text-muted-foreground text-sm">{cert.type}</p>
+                                    <span className="text-muted-foreground text-sm">•</span>
+                                    <p className="text-muted-foreground text-sm">{cert.issuer}</p>
+                                    <span className="text-muted-foreground text-sm">•</span>
+                                    <p className="text-muted-foreground text-sm">{cert.date}</p>
                                 </div>
                             </div>
                             <div className="mt-auto pt-4 flex justify-between items-center">
