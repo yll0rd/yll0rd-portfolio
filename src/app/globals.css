@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Shared by the writing canvas, private preview, and published articles. */
+/* @layer components {
+  .article-body { font-family: var(--font-serif), Georgia, serif; @apply break-words text-xl leading-[1.75] text-foreground; }
+  .article-body p { @apply my-5; }
+  .article-body h2 { @apply mt-10 mb-5 text-3xl font-medium leading-tight; }
+  .article-body h3 { @apply mt-8 mb-4 text-2xl font-medium leading-tight; }
+  .article-body ul { @apply my-5 list-disc pl-6; }
+  .article-body ol { @apply my-5 list-decimal pl-6; }
+  .article-body li { @apply my-2; }
+  .article-body blockquote { @apply my-8 border-l-2 border-secondary pl-6 italic text-muted-foreground; }
+  .article-body a { @apply text-primary underline underline-offset-4; }
+  .article-body pre { @apply my-8 overflow-x-auto rounded-md bg-muted p-5 font-mono text-sm leading-relaxed; }
+  .article-body code { @apply rounded bg-muted px-1 py-0.5 font-mono text-sm; }
+  .article-body pre code { @apply bg-transparent p-0; }
+  .article-body img { @apply my-8 h-auto max-w-full rounded-md; }
+  .article-body hr { @apply my-10 border-border; }
+  .article-body .is-editor-empty:first-child::before { content: attr(data-placeholder); @apply pointer-events-none float-left h-0 text-muted-foreground; }
+} */
+
 /* Reusable layout and typography shared across pages. */
 @layer components {
   .site-width {

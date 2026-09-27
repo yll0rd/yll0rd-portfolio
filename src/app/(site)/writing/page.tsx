@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { publishedPosts } from "@/lib/posts";
+import PostList from "@/components/blog/post-list";
+export const dynamic = "force-dynamic";
 import { ArrowRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Writing | Youmbi Leo",
@@ -7,7 +10,8 @@ export const metadata: Metadata = {
     "Technical notes, personal reflections, and everyday observations by Youmbi Leo.",
   alternates: { canonical: "https://yll0rd.me/writing" },
 };
-export default function WritingPage() {
+export default async function WritingPage() {
+  const posts = await publishedPosts();
   return (
     <div className="site-width pb-[100px]">
       <header className="pt-20 pb-16 max-[700px]:pt-14 max-[700px]:pb-11">
@@ -19,7 +23,7 @@ export default function WritingPage() {
           reflections.
         </p>
       </header>
-      <section className="max-w-[760px] border-t border-border pt-11 pb-20">
+      {posts.length ? <PostList posts={posts} /> : <section className="max-w-[760px] border-t border-border pt-11 pb-20">
         <span className="text-xs font-medium uppercase tracking-[.12em] text-muted-foreground">
           The first page
         </span>
@@ -30,7 +34,7 @@ export default function WritingPage() {
         <Link href="/about" className="text-link">
           Get to know me <ArrowRight size={16} />
         </Link>
-      </section>
+      </section>}
     </div>
   );
 }

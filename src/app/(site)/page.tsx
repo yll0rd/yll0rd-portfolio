@@ -1,7 +1,11 @@
 import Link from "next/link";
+import { publishedPosts } from "@/lib/posts";
+import PostList from "@/components/blog/post-list";
+export const dynamic = "force-dynamic";
 import { ArrowRight } from "lucide-react";
 import ProjectsSection from "@/components/projects-section";
-export default function Page() {
+export default async function Page() {
+  const posts = await publishedPosts(3);
   return (
     <div className="site-width">
       <section className="max-w-[940px] pt-[100px] pb-28 max-[700px]:pt-16 max-[700px]:pb-[72px]">
@@ -44,8 +48,9 @@ export default function Page() {
         <h2 className="editorial-title">Room for a longer thought.</h2>
         <p className="mb-[18px] leading-[1.8] text-muted-foreground">
           Notes on building software, things I’m learning, and life beyond the
-          screen. No posts published yet.
+          screen.
         </p>
+        {posts.length > 0 && <PostList posts={posts} />}
         <Link href="/writing" className="text-link">
           Visit writing <ArrowRight size={16} />
         </Link>

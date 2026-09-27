@@ -3,8 +3,6 @@ import { IBM_Plex_Sans, Newsreader } from "next/font/google";
 // @ts-ignore
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Footer } from "@/components/footer";
-import Navbar from "@/components/navbar";
 
 const sans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -134,11 +132,9 @@ export default function RootLayout({
             >
               Skip to content
             </a>
-            <Navbar />
             <main id="main-content" className="flex-1">
               {children}
             </main>
-            <Footer />
           </div>
         </ThemeProvider>
       </body>

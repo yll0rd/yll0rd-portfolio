@@ -232,3 +232,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ⭐ If you found this project helpful, please consider giving it a star!
 
 **Built with ❤️ using Next.js and TypeScript**
+
+## Writing dashboard
+
+The private writing workspace is available at `/dashboard`. See [dashboard setup and publishing documentation](docs/dashboard.md) for MongoDB, admin seeding, UploadThing, draft recovery, and verification.
