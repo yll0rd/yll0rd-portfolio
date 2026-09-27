@@ -29,6 +29,16 @@ export async function safeStartViewTransition(
 	return lastTransition;
 }
 
+export function isValidUrl(value: string): boolean {
+	try {
+		new URL(value);
+
+		return true;
+	} catch {
+		return false;
+	}
+}
+
 // Utility function to create slug from text content
 export function slugify(text: string): string {
 	return text

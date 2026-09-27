@@ -1,4 +1,4 @@
-import type { JSONContent } from "novel";
+import type { JSONContent } from "@tiptap/core";
 import { slugify } from "@/lib/utils";
 
 export type ArticleHeading = { id: string; text: string; level: number };

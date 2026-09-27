@@ -83,7 +83,7 @@ function CustomTable({
 				</div>
 			)}
 			<div className="max-w-full overflow-x-auto">
-				<NodeViewContent as="table" className="w-full" />
+				<NodeViewContent<"table"> as="table" className="w-full" />
 			</div>
 		</NodeViewWrapper>
 	);

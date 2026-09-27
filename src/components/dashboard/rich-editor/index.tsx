@@ -1,84 +1,19 @@
 "use client";
 
-import { useRef, useState } from "react";
-import {
-	EditorRoot,
-	EditorContent,
-	EditorCommand,
-	EditorCommandList,
-	EditorCommandEmpty,
-	EditorCommandItem,
-	Command,
-	createSuggestionItems,
-	renderItems,
-	handleCommandNavigation,
-	type EditorInstance,
-	type JSONContent,
-} from "novel";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { EditorContent, useEditor, useEditorState } from "@tiptap/react";
+import type { Editor, JSONContent } from "@tiptap/core";
+// @ts-ignore: Allow importing CSS side-effect without type declarations
+import "katex/dist/katex.min.css";
 // @ts-ignore: Allow importing CSS side-effect without type declarations
 import "./styles/prosemirror.css";
-import { Code, Heading2, List, Quote, Type } from "lucide-react";
 import { useDebouncedCallback } from "use-debounce";
 import { safeHref } from "@/lib/blog-content";
 import ImageUpload, { uploadImage } from "../image-upload";
-import { defaultExtensions } from "./extensions";
+import { createExtensions } from "./extensions";
+import { SlashCommand, createSlashItems } from "./slash-command";
 
-const suggestions = createSuggestionItems([
-	{
-		title: "Text",
-		description: "A plain paragraph",
-		icon: <Type size={18} />,
-		command: ({ editor, range }) =>
-			editor.chain().focus().deleteRange(range).setParagraph().run(),
-	},
-	{
-		title: "Heading",
-		description: "A section heading",
-		icon: <Heading2 size={18} />,
-		command: ({ editor, range }) =>
-			editor
-				.chain()
-				.focus()
-				.deleteRange(range)
-				.setHeading({ level: 2 })
-				.run(),
-	},
-	{
-		title: "Bullet list",
-		description: "A list of ideas",
-		icon: <List size={18} />,
-		command: ({ editor, range }) =>
-			editor.chain().focus().deleteRange(range).toggleBulletList().run(),
-	},
-	{
-		title: "Quote",
-		description: "A quoted passage",
-		icon: <Quote size={18} />,
-		command: ({ editor, range }) =>
-			editor.chain().focus().deleteRange(range).toggleBlockquote().run(),
-	},
-	{
-		title: "Code",
-		description: "A code block",
-		icon: <Code size={18} />,
-		command: ({ editor, range }) =>
-			editor.chain().focus().deleteRange(range).toggleCodeBlock().run(),
-	},
-]);
-
-const readOnlyExtensions = defaultExtensions.filter(
-	(extension) =>
-		!["globalDragHandle", "autoJoiner", "placeholder"].includes(
-			extension.name,
-		),
-);
-
-const extensions = [
-	...defaultExtensions,
-	Command.configure({
-		suggestion: { items: () => suggestions, render: renderItems },
-	}),
-];
+const readOnlyExcluded = ["globalDragHandle", "autoJoiner", "placeholder"];
 
 export default function RichEditor({
 	initialContent,
@@ -93,20 +28,99 @@ export default function RichEditor({
 	disabled?: boolean;
 	notEditable?: boolean;
 }) {
-	const editorRef = useRef<EditorInstance | null>(null);
+	const editorRef = useRef<Editor | null>(null);
 	const changeRef = useRef(onChange);
+	const insertFileRef = useRef(insertFile);
 
 	changeRef.current = onChange;
-	const [editor, setEditor] = useState<EditorInstance | null>(null);
+	insertFileRef.current = insertFile;
 	const [uploadError, setUploadError] = useState("");
 	const [uploading, setUploading] = useState(false);
 	const [linkOpen, setLinkOpen] = useState(false);
 	const [linkUrl, setLinkUrl] = useState("");
 
 	const debouncedUpdates = useDebouncedCallback(
-		(editor: EditorInstance) => changeRef.current?.(editor.getJSON()),
+		(editor: Editor) => changeRef.current?.(editor.getJSON()),
 		800,
 	);
+
+	// Built once per editor; refs keep the callbacks current.
+	const extensions = useMemo(() => {
+		const base = createExtensions(() => editorRef.current);
+
+		if (notEditable)
+			return base.filter(
+				(extension) => !readOnlyExcluded.includes(extension.name),
+			);
+
+		return [
+			...base,
+			SlashCommand.configure({
+				items: createSlashItems({
+					uploadImage: (file, position) =>
+						void insertFileRef.current(file, position),
+				}),
+			}),
+		];
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	const editor = useEditor({
+		extensions,
+		content: initialContent,
+		immediatelyRender: false,
+		editable: !disabled && !notEditable,
+		onCreate: ({ editor }) => {
+			editorRef.current = editor;
+		},
+		onUpdate: ({ editor }) => {
+			if (editor.isEditable) debouncedUpdates(editor);
+		},
+		onDestroy: () => {
+			editorRef.current = null;
+		},
+		editorProps: {
+			attributes: {
+				class: `prose prose-lg dark:prose-invert prose-headings:font-title prose-code:before:content-none prose-code:after:content-none font-default focus:outline-none ${notEditable ? "max-w-none" : "min-h-[420px]"} ${editorClassName || ""}`,
+				role: notEditable ? "document" : "textbox",
+				"aria-label": "Article content",
+				...(notEditable ? {} : { "aria-multiline": "true" }),
+			},
+			handlePaste: (view, event) => {
+				if (!view.editable) return false;
+				const file = Array.from(event.clipboardData?.files || []).find(
+					(file) => file.type.startsWith("image/"),
+				);
+
+				if (!file) return false;
+				event.preventDefault();
+				void insertFileRef.current(file, view.state.selection.from);
+
+				return true;
+			},
+			handleDrop: (view, event, _slice, moved) => {
+				if (!view.editable || moved) return false;
+				const file = Array.from(event.dataTransfer?.files || []).find(
+					(file) => file.type.startsWith("image/"),
+				);
+
+				if (!file) return false;
+				event.preventDefault();
+				const pos = view.posAtCoords({
+					left: event.clientX,
+					top: event.clientY,
+				})?.pos;
+
+				void insertFileRef.current(file, pos);
+
+				return true;
+			},
+		},
+	});
+
+	useEffect(() => {
+		editor?.setEditable(!disabled && !notEditable);
+	}, [editor, disabled, notEditable]);
 
 	async function insertFile(file: File, position?: number) {
 		setUploading(true);
@@ -184,6 +198,18 @@ export default function RichEditor({
 		},
 	];
 
+	// v3 does not re-render on every transaction, so subscribe to the toolbar state.
+	const activeTools = useEditorState({
+		editor,
+		selector: ({ editor }) =>
+			Object.fromEntries(
+				tools.map((tool) => [
+					tool.active,
+					editor?.isActive(tool.active) ?? false,
+				]),
+			),
+	});
+
 	return (
 		<div>
 			{!notEditable && (
@@ -197,9 +223,7 @@ export default function RichEditor({
 							key={tool.name}
 							type="button"
 							disabled={!editor || disabled}
-							aria-pressed={
-								editor?.isActive(tool.active) || false
-							}
+							aria-pressed={activeTools?.[tool.active] ?? false}
 							className="min-h-10 rounded px-3 text-xs hover:bg-accent aria-pressed:bg-accent disabled:opacity-50"
 							onClick={tool.run}
 						>
@@ -274,97 +298,7 @@ export default function RichEditor({
 					</button>
 				</div>
 			)}
-			<EditorRoot>
-				<EditorContent
-					initialContent={initialContent}
-					extensions={notEditable ? readOnlyExtensions : extensions}
-					immediatelyRender={false}
-					editable={!disabled && !notEditable}
-					onCreate={({ editor }) => {
-						editorRef.current = editor;
-						setEditor(editor);
-					}}
-					onUpdate={({ editor }) => {
-						if (editor.isEditable) debouncedUpdates(editor);
-					}}
-					onDestroy={() => {
-						editorRef.current = null;
-					}}
-					editorProps={{
-						attributes: {
-							class: `prose prose-lg dark:prose-invert prose-headings:font-title font-default focus:outline-none ${notEditable ? "max-w-none" : "min-h-[420px]"} ${editorClassName || ""}`,
-							role: notEditable ? "document" : "textbox",
-							"aria-label": "Article content",
-							...(notEditable
-								? {}
-								: { "aria-multiline": "true" }),
-						},
-						handleDOMEvents: {
-							keydown: (_view, event) =>
-								!notEditable &&
-								!disabled &&
-								handleCommandNavigation(event),
-						},
-						handlePaste: (view, event) => {
-							if (notEditable || disabled) return false;
-							const file = Array.from(
-								event.clipboardData?.files || [],
-							).find((file) => file.type.startsWith("image/"));
-
-							if (!file) return false;
-							event.preventDefault();
-							void insertFile(file, view.state.selection.from);
-
-							return true;
-						},
-						handleDrop: (view, event, _slice, moved) => {
-							if (notEditable || disabled) return false;
-
-							if (moved) return false;
-							const file = Array.from(
-								event.dataTransfer?.files || [],
-							).find((file) => file.type.startsWith("image/"));
-
-							if (!file) return false;
-							event.preventDefault();
-							const pos = view.posAtCoords({
-								left: event.clientX,
-								top: event.clientY,
-							})?.pos;
-
-							void insertFile(file, pos);
-
-							return true;
-						},
-					}}
-				>
-					{!notEditable && (
-						<EditorCommand className="z-[60] max-h-72 w-[min(320px,80vw)] overflow-y-auto rounded-md border border-border bg-popover p-2 shadow-lg">
-							<EditorCommandEmpty className="p-3 text-sm">
-								No matching blocks.
-							</EditorCommandEmpty>
-							<EditorCommandList>
-								{suggestions.map((item) => (
-									<EditorCommandItem
-										key={item.title}
-										value={item.title}
-										onCommand={item.command!}
-										className="flex cursor-pointer items-center gap-3 rounded p-3 text-sm aria-selected:bg-accent"
-									>
-										{item.icon}
-										<span>
-											{item.title}
-											<span className="block text-xs text-muted-foreground">
-												{item.description}
-											</span>
-										</span>
-									</EditorCommandItem>
-								))}
-							</EditorCommandList>
-						</EditorCommand>
-					)}
-				</EditorContent>
-			</EditorRoot>
+			<EditorContent editor={editor} />
 			{!notEditable && (
 				<div className="mt-8 border-t border-border pt-5">
 					<ImageUpload

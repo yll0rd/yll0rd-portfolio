@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
 	NODE_HANDLES_SELECTED_STYLE_CLASSNAME,
 	cn,
-	// isValidUrl,
+	isValidUrl,
 } from "@/lib/utils";
 import {
 	type CommandProps,
@@ -24,7 +24,6 @@ import {
 } from "@tiptap/react";
 import { Image, Link, Upload } from "lucide-react";
 import { type FormEvent, useId, useState } from "react";
-import { isValidUrl } from "novel";
 
 export interface ImagePlaceholderOptions {
 	HTMLAttributes: Record<string, any>;

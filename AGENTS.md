@@ -1,5 +1,9 @@
 # Repository Guidelines
 
+## Brand and Design
+
+Before editing visual design, public-facing copy, imagery, navigation, or article presentation, read [BRAND.md](BRAND.md). It documents the portfolio’s identity, current theme tokens, typography, responsive patterns, and accessibility expectations. Follow it for additions and edits unless the user explicitly requests a different direction.
+
 ## Project Structure & Module Organization
 
 This portfolio uses Next.js 14 App Router, React 18, TypeScript, and Tailwind CSS.

@@ -116,12 +116,6 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
     text-decoration-thickness: 2px;
 }
 
-/* Overwrite tippy-box original max-width */
-
-.tippy-box {
-    max-width: min(400px, calc(100vw - 32px)) !important;
-}
-
 .ProseMirror:not(.dragging) .ProseMirror-selectednode {
     outline: none !important;
     background-color: hsl(var(--secondary) / 0.12);

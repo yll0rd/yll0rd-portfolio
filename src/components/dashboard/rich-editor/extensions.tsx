@@ -1,24 +1,13 @@
-import {
-	TiptapImage,
-	TiptapLink,
-	UpdatedImage,
-	TaskList,
-	TaskItem,
-	HorizontalRule,
-	StarterKit,
-	Placeholder,
-	AIHighlight,
-	Color,
-	TextStyle,
-	TiptapUnderline,
-	HighlightExtension,
-	CodeBlockLowlight,
-	UploadImagesPlugin,
-	Mathematics,
-	CharacterCount,
-} from "novel";
+import { StarterKit } from "@tiptap/starter-kit";
+import { Heading } from "@tiptap/extension-heading";
+import { TaskItem, TaskList } from "@tiptap/extension-list";
+import { CharacterCount, Placeholder } from "@tiptap/extensions";
+import { Color, TextStyle } from "@tiptap/extension-text-style";
+import { Highlight } from "@tiptap/extension-highlight";
+import { CodeBlockLowlight } from "@tiptap/extension-code-block-lowlight";
+import { Mathematics } from "@tiptap/extension-mathematics";
 import { Youtube } from "@tiptap/extension-youtube";
-import { type HeadingOptions } from "@tiptap/extension-heading";
+import { TableCell, TableHeader, TableRow } from "@tiptap/extension-table";
 
 import { cx } from "class-variance-authority";
 import { Typography } from "@tiptap/extension-typography";
@@ -26,12 +15,10 @@ import GlobalDragHandle from "tiptap-extension-global-drag-handle";
 import AutoJoiner from "tiptap-extension-auto-joiner"; // optional
 import { Subscript } from "@tiptap/extension-subscript";
 import { Superscript } from "@tiptap/extension-superscript";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import TableRow from "@tiptap/extension-table-row";
 import { Markdown } from "tiptap-markdown";
 import { slugify } from "@/lib/utils";
-import { mergeAttributes, Node, textblockTypeInputRule } from "@tiptap/core";
+import { mergeAttributes, type Editor } from "@tiptap/core";
+import type { Node as ProseMirrorNode } from "@tiptap/pm/model";
 import { createLowlight, all } from "lowlight";
 import { TableExtension as Table } from "./custom-extensions/table";
 import { ImageExtension } from "./custom-extensions/image";
@@ -39,17 +26,8 @@ import { ImagePlaceholder } from "./custom-extensions/image-placeholder";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 import CodeBlockComponent from "./custom-extensions/enhanced-codeblock";
 
-const aiHighlight = AIHighlight;
 const placeholder = Placeholder.configure({
-	placeholder: "Start typing here...",
-});
-
-const tiptapLink = TiptapLink.configure({
-	HTMLAttributes: {
-		class: cx(
-			"text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer",
-		),
-	},
+	placeholder: "Start typing here, or press '/' for blocks...",
 });
 
 const markdownExtension = Markdown.configure({
@@ -63,20 +41,6 @@ const markdownExtension = Markdown.configure({
 	transformCopiedText: false,
 });
 
-const tiptapImage = TiptapImage.extend({
-	addProseMirrorPlugins() {
-		return [
-			UploadImagesPlugin({
-				imageClass: cx("opacity-40 rounded-lg border border-border"),
-			}),
-		];
-	},
-}).configure({
-	allowBase64: true,
-	HTMLAttributes: {
-		class: cx("rounded-lg border border-muted"),
-	},
-});
 const tableConfigs = [
 	Table.configure({
 		handleWidth: 5,
@@ -87,12 +51,6 @@ const tableConfigs = [
 	TableHeader,
 	TableCell,
 ];
-
-const updatedImage = UpdatedImage.configure({
-	HTMLAttributes: {
-		class: cx("rounded-lg border border-muted"),
-	},
-});
 
 const youTube = Youtube.configure({
 	HTMLAttributes: {
@@ -112,13 +70,7 @@ const taskItem = TaskItem.configure({
 	nested: true,
 });
 
-const horizontalRule = HorizontalRule.configure({
-	HTMLAttributes: {
-		class: cx("mt-4 mb-6 border-t border-muted-foreground"),
-	},
-});
-
-const highlightExtension = HighlightExtension.configure({
+const highlightExtension = Highlight.configure({
 	multicolor: true,
 });
 // create a lowlight instance with all languages loaded
@@ -132,122 +84,31 @@ const codeBlockLowlight = CodeBlockLowlight.extend({
 	defaultLanguage: "javascript",
 });
 
-const CustomHeading = Node.create<HeadingOptions>({
-	name: "heading",
-
-	addOptions() {
-		return {
-			levels: [1, 2, 3, 4, 5, 6],
-			HTMLAttributes: {},
-		};
-	},
-
-	content: "inline*",
-
-	group: "block",
-
-	defining: true,
-
+// Headings carry an id so the article's table of contents can link to them.
+const CustomHeading = Heading.extend({
 	addAttributes() {
 		return {
-			level: {
-				default: 1,
-				rendered: false,
-			},
+			...this.parent?.(),
 			id: {
 				default: null,
-				rendered: true,
+				rendered: false,
 				parseHTML: (element) => element.getAttribute("id"),
-				renderHTML: (attributes) => {
-					if (!attributes.id) {
-						return {};
-					}
-
-					return { id: attributes.id };
-				},
 			},
 		};
-	},
-
-	parseHTML() {
-		return this.options.levels.map((level: 1 | 2 | 3 | 4 | 5 | 6) => ({
-			tag: `h${level}`,
-			attrs: { level },
-		}));
 	},
 
 	renderHTML({ node, HTMLAttributes }) {
-		// Get text content from the node
-		const text = node.content.content.map((n) => n.text || "").join("");
-
-		// Generate slug from text
-		const id = slugify(text);
-
-		const level = node.attrs.level;
-		const hasLevel = this.options.levels.includes(level);
-		const tag = `h${hasLevel ? level : this.options.levels[0]}`;
+		const hasLevel = this.options.levels.includes(node.attrs.level);
+		const level = hasLevel ? node.attrs.level : this.options.levels[0];
 
 		return [
-			tag,
+			`h${level}`,
 			mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
-				id,
+				// Prefer the de-duplicated id from prepareArticleHeadings.
+				id: node.attrs.id || slugify(node.textContent) || undefined,
 			}),
 			0,
 		];
-	},
-
-	addCommands() {
-		return {
-			setHeading:
-				(attributes) =>
-				({ commands }) => {
-					if (!this.options.levels.includes(attributes.level)) {
-						return false;
-					}
-
-					return commands.setNode(this.name, attributes);
-				},
-			toggleHeading:
-				(attributes) =>
-				({ commands }) => {
-					if (!this.options.levels.includes(attributes.level)) {
-						return false;
-					}
-
-					return commands.toggleNode(
-						this.name,
-						"paragraph",
-						attributes,
-					);
-				},
-		};
-	},
-
-	addKeyboardShortcuts() {
-		return this.options.levels.reduce(
-			(items, level) => ({
-				...items,
-				...{
-					[`Mod-Alt-${level}`]: () =>
-						this.editor.commands.toggleHeading({ level }),
-				},
-			}),
-			{},
-		);
-	},
-
-	addInputRules() {
-		return this.options.levels.map((level) => {
-			return textblockTypeInputRule({
-				find: new RegExp(
-					`^(#{${Math.min(...this.options.levels)},${level}})\\s$`,
-				),
-				type: this.type,
-				getAttributes: {
-					level,
-				},
-			});
-		});
 	},
 });
 
@@ -276,11 +137,23 @@ const starterKit = StarterKit.configure({
 	},
 	code: {
 		HTMLAttributes: {
-			class: cx("rounded-md bg-muted  px-1.5 py-1 font-mono font-medium"),
+			class: cx("rounded-md bg-muted px-1.5 py-1 font-mono font-medium"),
 			spellcheck: "false",
 		},
 	},
-	horizontalRule: false,
+	horizontalRule: {
+		HTMLAttributes: {
+			class: cx("mt-4 mb-6 border-t border-muted-foreground"),
+		},
+	},
+	link: {
+		openOnClick: false,
+		HTMLAttributes: {
+			class: cx(
+				"text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer",
+			),
+		},
+	},
 	dropcursor: {
 		color: "hsl(var(--secondary))",
 		width: 4,
@@ -288,68 +161,89 @@ const starterKit = StarterKit.configure({
 	gapcursor: false,
 });
 
-const mathematics = Mathematics.configure({
-	HTMLAttributes: {
-		class: cx("text-foreground rounded p-1 hover:bg-accent cursor-pointer"),
-	},
-	katexOptions: {
-		throwOnError: false,
-	},
-});
+// Clicking a formula in the editor lets the author change its LaTeX.
+function editMath(
+	editor: Editor,
+	node: ProseMirrorNode,
+	pos: number,
+	type: "inline" | "block",
+) {
+	if (!editor.isEditable) return;
+	const latex = window.prompt("Edit the LaTeX formula", node.attrs.latex);
+
+	if (latex === null) return;
+	const chain = editor.chain().setNodeSelection(pos);
+
+	if (!latex.trim())
+		(type === "inline"
+			? chain.deleteInlineMath({ pos })
+			: chain.deleteBlockMath({ pos })
+		).run();
+	else
+		(type === "inline"
+			? chain.updateInlineMath({ latex, pos })
+			: chain.updateBlockMath({ latex, pos })
+		).run();
+}
 
 const characterCount = CharacterCount.configure();
 
-export const defaultExtensions = [
-	starterKit,
-	CustomHeading.configure({
-		levels: [1, 2, 3],
-		HTMLAttributes: {
-			class: "font-[family-name:var(--font-serif)]",
+// Formula clicks need the editor instance, so extensions are created per editor.
+export function createExtensions(getEditor: () => Editor | null) {
+	const mathematics = Mathematics.configure({
+		katexOptions: { throwOnError: false },
+		inlineOptions: {
+			onClick: (node, pos) => {
+				const editor = getEditor();
+
+				if (editor) editMath(editor, node, pos, "inline");
+			},
 		},
-	}),
-	ImageExtension.extend({
-		addProseMirrorPlugins() {
-			return [
-				UploadImagesPlugin({
-					imageClass: cx(
-						"opacity-40 rounded-lg border border-border",
-					),
-				}),
-			];
+		blockOptions: {
+			onClick: (node, pos) => {
+				const editor = getEditor();
+
+				if (editor) editMath(editor, node, pos, "block");
+			},
 		},
-	}).configure({
-		allowBase64: true,
-		HTMLAttributes: {
-			class: cx("rounded-lg border border-muted relative"),
-		},
-	}),
-	ImagePlaceholder,
-	codeBlockLowlight,
-	Color,
-	TiptapUnderline,
-	TextStyle,
-	highlightExtension,
-	placeholder,
-	tiptapLink,
-	// tiptapImage,
-	youTube,
-	Typography,
-	Subscript,
-	Superscript,
-	// updatedImage,
-	...tableConfigs,
-	characterCount,
-	mathematics,
-	taskList,
-	taskItem,
-	horizontalRule,
-	aiHighlight,
-	markdownExtension,
-	GlobalDragHandle.configure({
-		dragHandleWidth: 20,
-		scrollTreshold: 100,
-	}),
-	AutoJoiner.configure({
-		elementsToJoin: ["bulletList", "orderedList"],
-	}),
-];
+	});
+
+	return [
+		starterKit,
+		CustomHeading.configure({
+			levels: [1, 2, 3],
+			HTMLAttributes: {
+				class: "font-[family-name:var(--font-serif)]",
+			},
+		}),
+		ImageExtension.configure({
+			allowBase64: true,
+			HTMLAttributes: {
+				class: cx("rounded-lg border border-muted relative"),
+			},
+		}),
+		ImagePlaceholder,
+		codeBlockLowlight,
+		Color,
+		TextStyle,
+		highlightExtension,
+		placeholder,
+		youTube,
+		Typography,
+		Subscript,
+		Superscript,
+		...tableConfigs,
+		characterCount,
+		mathematics,
+		taskList,
+		taskItem,
+		markdownExtension,
+		GlobalDragHandle.configure({
+			dragHandleWidth: 20,
+			scrollTreshold: 100,
+		}),
+		AutoJoiner.configure({
+			elementsToJoin: ["bulletList", "orderedList"],
+		}),
+	];
+}

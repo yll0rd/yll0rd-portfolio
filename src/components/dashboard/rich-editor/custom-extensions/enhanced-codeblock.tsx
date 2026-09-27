@@ -51,7 +51,7 @@ export default function CodeBlockComponent({ node }: NodeViewProps) {
 				</span>
 			</div>
 			<pre className="!m-0 max-h-[36rem] overflow-auto !rounded-none !border-0">
-				<NodeViewContent as="code" />
+				<NodeViewContent<"code"> as="code" />
 			</pre>
 		</NodeViewWrapper>
 	);

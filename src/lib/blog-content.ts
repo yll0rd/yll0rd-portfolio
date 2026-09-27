@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { type JSONContent } from "novel";
+import { type JSONContent } from "@tiptap/core";
 
 export function safeHref(value: unknown): value is string {
 	if (typeof value !== "string") return false;

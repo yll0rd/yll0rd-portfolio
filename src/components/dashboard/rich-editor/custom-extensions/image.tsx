@@ -1,6 +1,6 @@
 "use client";
 
-import { TiptapImage as Image } from "novel";
+import { Image } from "@tiptap/extension-image";
 
 import {
 	NodeViewContent,
@@ -195,14 +195,14 @@ function TiptapImage(props: NodeViewProps) {
 					title={node.attrs.title}
 					className="not-prose"
 				/>
-				<NodeViewContent
+				<NodeViewContent<"figcaption">
 					as="figcaption"
 					className="text-center not-prose font-[family-name:var(--font-sans)] text-xs text-muted-foreground"
 				>
 					{node.attrs.title}
 				</NodeViewContent>
 
-				{editor?.isEditable && (
+				{editor?.isEditable && !!imageRef.current && (
 					<>
 						<div
 							className="absolute inset-y-0 z-20 flex w-[25px] cursor-col-resize items-center justify-start p-2"
