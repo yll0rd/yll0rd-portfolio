@@ -13,6 +13,13 @@ import ImageUpload, { uploadImage } from "../image-upload";
 import { createExtensions } from "./extensions";
 import { SlashCommand, createSlashItems } from "./slash-command";
 
+// Relative sizes follow the article's prose scale on every screen.
+const textSizes = [
+	{ name: "Small", value: "0.875em" },
+	{ name: "Normal", value: null },
+	{ name: "Large", value: "1.25em" },
+];
+
 const readOnlyExcluded = ["globalDragHandle", "autoJoiner", "placeholder"];
 
 export default function RichEditor({
@@ -210,6 +217,20 @@ export default function RichEditor({
 			),
 	});
 
+	const activeSize = useEditorState({
+		editor,
+		selector: ({ editor }) =>
+			(editor?.getAttributes("textStyle").fontSize as
+				string | undefined) ?? null,
+	});
+
+	function setTextSize(value: string | null) {
+		const chain = editor?.chain().focus();
+
+		if (value) chain?.setFontSize(value).run();
+		else chain?.unsetFontSize().run();
+	}
+
 	return (
 		<div>
 			{!notEditable && (
@@ -230,6 +251,26 @@ export default function RichEditor({
 							{tool.name}
 						</button>
 					))}
+					<div
+						role="group"
+						aria-label="Text size"
+						className="flex items-center gap-1 border-x border-border px-1"
+					>
+						{textSizes.map((size) => (
+							<button
+								key={size.name}
+								type="button"
+								disabled={!editor || disabled}
+								aria-pressed={
+									(activeSize ?? null) === size.value
+								}
+								className="min-h-10 rounded px-3 text-xs hover:bg-accent aria-pressed:bg-accent disabled:opacity-50"
+								onClick={() => setTextSize(size.value)}
+							>
+								{size.name}
+							</button>
+						))}
+					</div>
 					<button
 						type="button"
 						disabled={!editor || disabled}

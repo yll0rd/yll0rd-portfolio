@@ -2,7 +2,7 @@ import { StarterKit } from "@tiptap/starter-kit";
 import { Heading } from "@tiptap/extension-heading";
 import { TaskItem, TaskList } from "@tiptap/extension-list";
 import { CharacterCount, Placeholder } from "@tiptap/extensions";
-import { Color, TextStyle } from "@tiptap/extension-text-style";
+import { Color, FontSize, TextStyle } from "@tiptap/extension-text-style";
 import { Highlight } from "@tiptap/extension-highlight";
 import { CodeBlockLowlight } from "@tiptap/extension-code-block-lowlight";
 import { Mathematics } from "@tiptap/extension-mathematics";
@@ -226,6 +226,7 @@ export function createExtensions(getEditor: () => Editor | null) {
 		codeBlockLowlight,
 		Color,
 		TextStyle,
+		FontSize,
 		highlightExtension,
 		placeholder,
 		youTube,
