@@ -1,21 +1,14 @@
 "use client";
 
-import {
-	TiptapImage as Image,
-} from "novel";
+import { TiptapImage as Image } from "novel";
 
 import {
-    NodeViewContent,
+	NodeViewContent,
 	type NodeViewProps,
 	NodeViewWrapper,
 	ReactNodeViewRenderer,
 } from "@tiptap/react";
-import {
-	AlignCenter,
-	AlignLeft,
-	AlignRight,
-	Trash,
-} from "lucide-react";
+import { AlignCenter, AlignLeft, AlignRight, Trash } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -63,9 +56,9 @@ function TiptapImage(props: NodeViewProps) {
 	const [resizeInitialMouseX, setResizeInitialMouseX] = useState(0);
 
 	function handleResizingPosition({
-										e,
-										position,
-									}: {
+		e,
+		position,
+	}: {
 		e: React.MouseEvent<HTMLDivElement, MouseEvent>;
 		position: "left" | "right";
 	}) {
@@ -79,6 +72,7 @@ function TiptapImage(props: NodeViewProps) {
 		setResizing(true);
 
 		setResizeInitialMouseX(event.clientX);
+
 		if (imageRef.current) {
 			setResizeInitialWidth(imageRef.current.offsetWidth);
 		}
@@ -90,6 +84,7 @@ function TiptapImage(props: NodeViewProps) {
 		}
 
 		let dx = event.clientX - resizeInitialMouseX;
+
 		if (resizingPosition === "left") {
 			dx = resizeInitialMouseX - event.clientX;
 		}
@@ -120,6 +115,7 @@ function TiptapImage(props: NodeViewProps) {
 		setResizingPosition(position);
 
 		setResizeInitialMouseX(event.touches[0].clientX);
+
 		if (imageRef.current) {
 			setResizeInitialWidth(imageRef.current.offsetWidth);
 		}
@@ -131,6 +127,7 @@ function TiptapImage(props: NodeViewProps) {
 		}
 
 		let dx = event.touches[0].clientX - resizeInitialMouseX;
+
 		if (resizingPosition === "left") {
 			dx = resizeInitialMouseX - event.touches[0].clientX;
 		}
@@ -158,17 +155,24 @@ function TiptapImage(props: NodeViewProps) {
 		// Touch events
 		window.addEventListener("touchmove", handleTouchMove);
 		window.addEventListener("touchend", handleTouchEnd);
+
 		return () => {
 			window.removeEventListener("mousemove", resize);
 			window.removeEventListener("mouseup", endResize);
 			window.removeEventListener("touchmove", handleTouchMove);
 			window.removeEventListener("touchend", handleTouchEnd);
 		};
-	}, [resizing, resizingPosition, resizeInitialMouseX, resizeInitialWidth, updateAttributes]);
+	}, [
+		resizing,
+		resizingPosition,
+		resizeInitialMouseX,
+		resizeInitialWidth,
+		updateAttributes,
+	]);
 
 	return (
 		<NodeViewWrapper
-            ref={nodeRef}
+			ref={nodeRef}
 			className={cn(
 				"relative flex flex-col rounded-md border-2 border-transparent",
 				selected ? "border-secondary" : "",
@@ -191,7 +195,10 @@ function TiptapImage(props: NodeViewProps) {
 					title={node.attrs.title}
 					className="not-prose"
 				/>
-				<NodeViewContent as="figcaption" className="text-center not-prose font-[family-name:var(--font-sans)] text-xs text-muted-foreground">
+				<NodeViewContent
+					as="figcaption"
+					className="text-center not-prose font-[family-name:var(--font-sans)] text-xs text-muted-foreground"
+				>
 					{node.attrs.title}
 				</NodeViewContent>
 
@@ -201,9 +208,14 @@ function TiptapImage(props: NodeViewProps) {
 							className="absolute inset-y-0 z-20 flex w-[25px] cursor-col-resize items-center justify-start p-2"
 							style={{ left: 0 }}
 							onMouseDown={(event) => {
-								handleResizingPosition({ e: event, position: "left" });
+								handleResizingPosition({
+									e: event,
+									position: "left",
+								});
 							}}
-							onTouchStart={(event) => handleTouchStart(event, "left")}
+							onTouchStart={(event) =>
+								handleTouchStart(event, "left")
+							}
 						>
 							<div className="z-20 h-[70px] w-1 rounded-xl border bg-primary/70 opacity-60 transition-opacity group-hover:opacity-100" />
 						</div>
@@ -211,9 +223,14 @@ function TiptapImage(props: NodeViewProps) {
 							className="absolute inset-y-0 z-20 flex w-[25px] cursor-col-resize items-center justify-end p-2"
 							style={{ right: 0 }}
 							onMouseDown={(event) => {
-								handleResizingPosition({ e: event, position: "right" });
+								handleResizingPosition({
+									e: event,
+									position: "right",
+								});
 							}}
-							onTouchStart={(event) => handleTouchStart(event, "right")}
+							onTouchStart={(event) =>
+								handleTouchStart(event, "right")
+							}
 						>
 							<div className="z-20 h-[70px] w-1 rounded-xl border bg-primary/70 opacity-60 transition-opacity group-hover:opacity-100" />
 						</div>
@@ -225,8 +242,8 @@ function TiptapImage(props: NodeViewProps) {
 						>
 							<Button
 								type="button"
-                                size="icon"
-                                aria-pressed={node.attrs.align === "left"}
+								size="icon"
+								aria-pressed={node.attrs.align === "left"}
 								className={cn(
 									"size-7",
 									node.attrs.align === "left" && "bg-accent",
@@ -238,15 +255,22 @@ function TiptapImage(props: NodeViewProps) {
 									});
 								}}
 							>
-								<AlignLeft aria-hidden="true" className="size-4" /><span className="sr-only">Align image left</span>
+								<AlignLeft
+									aria-hidden="true"
+									className="size-4"
+								/>
+								<span className="sr-only">
+									Align image left
+								</span>
 							</Button>
 							<Button
 								type="button"
-                                size="icon"
-                                aria-pressed={node.attrs.align === "center"}
+								size="icon"
+								aria-pressed={node.attrs.align === "center"}
 								className={cn(
 									"size-7",
-									node.attrs.align === "center" && "bg-accent",
+									node.attrs.align === "center" &&
+										"bg-accent",
 								)}
 								variant="ghost"
 								onClick={() => {
@@ -255,12 +279,18 @@ function TiptapImage(props: NodeViewProps) {
 									});
 								}}
 							>
-								<AlignCenter aria-hidden="true" className="size-4" /><span className="sr-only">Align image center</span>
+								<AlignCenter
+									aria-hidden="true"
+									className="size-4"
+								/>
+								<span className="sr-only">
+									Align image center
+								</span>
 							</Button>
 							<Button
 								type="button"
-                                size="icon"
-                                aria-pressed={node.attrs.align === "right"}
+								size="icon"
+								aria-pressed={node.attrs.align === "right"}
 								className={cn(
 									"size-7",
 									node.attrs.align === "right" && "bg-accent",
@@ -272,20 +302,30 @@ function TiptapImage(props: NodeViewProps) {
 									});
 								}}
 							>
-								<AlignRight aria-hidden="true" className="size-4" /><span className="sr-only">Align image right</span>
+								<AlignRight
+									aria-hidden="true"
+									className="size-4"
+								/>
+								<span className="sr-only">
+									Align image right
+								</span>
 							</Button>
-							<Separator orientation="vertical" className="h-[20px]" />
+							<Separator
+								orientation="vertical"
+								className="h-[20px]"
+							/>
 							<Button
 								type="button"
-                                size="icon"
+								size="icon"
 								className="size-7 text-destructive hover:bg-destructive/10 hover:text-destructive focus:text-destructive"
 								variant="ghost"
 								onClick={() => {
-                                    deleteNode();
-                                    editor.commands.focus();
+									deleteNode();
+									editor.commands.focus();
 								}}
 							>
-								<Trash aria-hidden="true" className="size-4" /><span className="sr-only">Delete image</span>
+								<Trash aria-hidden="true" className="size-4" />
+								<span className="sr-only">Delete image</span>
 							</Button>
 						</div>
 					</>

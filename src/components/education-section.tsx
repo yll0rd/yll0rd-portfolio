@@ -1,75 +1,89 @@
-import React from 'react';
+import React from "react";
 import Image from "next/image";
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+} from "@/components/ui/card";
 import { ALL_LOGOS } from "@/lib/constants";
 
-const EducationSection = ({ className="" }: { className?: string }) => {
-    return (
-        <section id="education" className={`mb-24 ${className}`}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-12 text-left">Education</h2>
-            <div className="space-y-6">
+const EducationSection = ({ className = "" }: { className?: string }) => {
+	return (
+		<section id="education" className={`mb-24 ${className}`}>
+			<h2 className="text-2xl md:text-3xl font-bold mb-12 text-left">
+				Education
+			</h2>
+			<div className="space-y-6">
+				<Card className="shadow-none">
+					<CardHeader className="pb-4">
+						<div className="flex items-start gap-4">
+							<div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card">
+								<a
+									href="https://www.linkedin.com/school/104648904"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="cursor-pointer transition-opacity hover:opacity-80"
+								>
+									<Image
+										src={
+											ALL_LOGOS.africanLeadershipExperience
+										}
+										alt="African Leadership Experience Logo"
+										width={48}
+										height={48}
+										className="w-full h-full object-contain p-1"
+									/>
+								</a>
+							</div>
+							<div>
+								<a
+									href="https://www.linkedin.com/school/104648904"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="hover:text-primary transition-colors"
+								>
+									<CardTitle>
+										Software Engineering Program
+									</CardTitle>
+								</a>
+								<CardDescription>
+									<span className="block text-muted-foreground">
+										African Leadership Experience
+									</span>
+									<span className="block text-sm text-muted-foreground">
+										Feb 2023 - Jun 2024
+									</span>
+								</CardDescription>
+							</div>
+						</div>
+					</CardHeader>
+				</Card>
 
-                <Card className="shadow-none">
-                    <CardHeader className="pb-4">
-                        <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card">
-                                <a
-                                    href="https://www.linkedin.com/school/104648904"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="cursor-pointer transition-opacity hover:opacity-80"
-                                >
-                                    <Image
-                                        src={ALL_LOGOS.africanLeadershipExperience}
-                                        alt="African Leadership Experience Logo"
-                                        width={48}
-                                        height={48}
-                                        className="w-full h-full object-contain p-1"
-                                    />
-                                </a>
-                            </div>
-                            <div>
-                                <a
-                                    href="https://www.linkedin.com/school/104648904"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="hover:text-primary transition-colors"
-                                >
-                                    <CardTitle>Software Engineering Program</CardTitle>
-                                </a>
-                                <CardDescription>
-                                    <span className="block text-muted-foreground">African Leadership Experience</span>
-                                    <span className="block text-sm text-muted-foreground">Feb 2023 - Jun 2024</span>
-                                </CardDescription>
-                            </div>
-                        </div>
-                    </CardHeader>
-                </Card>
-
-                {/* Master's Degree */}
-                {/* <Card className="shadow-none">
+				{/* Master's Degree */}
+				{/* <Card className="shadow-none">
                 <CardHeader className="pb-4">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card">
-                      <a 
-                        href="https://www.uclan.ac.uk/postgraduate/courses/mba-master-of-business-administration" 
-                        target="_blank" 
+                      <a
+                        href="https://www.uclan.ac.uk/postgraduate/courses/mba-master-of-business-administration"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="cursor-pointer transition-opacity hover:opacity-80"
                       >
-                        <Image 
-                          src="/uclan-logo.jpg" 
-                          alt="University of Central Lancashire Logo" 
+                        <Image
+                          src="/uclan-logo.jpg"
+                          alt="University of Central Lancashire Logo"
                           width={48}
                           height={48}
-                          className="w-full h-full object-contain p-1" 
+                          className="w-full h-full object-contain p-1"
                         />
                       </a>
                     </div>
                     <div>
-                      <a 
-                        href="https://www.uclan.ac.uk/postgraduate/courses/mba-master-of-business-administration" 
-                        target="_blank" 
+                      <a
+                        href="https://www.uclan.ac.uk/postgraduate/courses/mba-master-of-business-administration"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-primary transition-colors"
                       >
@@ -84,48 +98,53 @@ const EducationSection = ({ className="" }: { className?: string }) => {
                 </CardHeader>
               </Card> */}
 
-                {/* Bachelor's degree Course */}
-                <Card className="shadow-none">
-                    <CardHeader className="pb-4">
-                        <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card">
-                                <a
-                                    href="https://nahpi.cm/departments/computer"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="cursor-pointer transition-opacity hover:opacity-80"
-                                >
-                                    <Image
-                                        src={ALL_LOGOS.nahpi}
-                                        alt="University of Bamenda Logo"
-                                        width={48}
-                                        height={48}
-                                        className="w-full h-full object-contain p-1"
-                                    />
-                                </a>
-                            </div>
-                            <div>
-                                <a
-                                    href="https://nahpi.cm/departments/computer"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="hover:text-primary transition-colors"
-                                >
-                                    <CardTitle>Bachelor's degree: Computer Engineering</CardTitle>
-                                </a>
-                                <CardDescription>
-                                    <span className="block text-muted-foreground">University of Bamenda</span>
-                                    <span className="block text-sm text-muted-foreground">Oct 2022 - Jun 2026</span>
-                                </CardDescription>
-                            </div>
-                        </div>
-                    </CardHeader>
-                </Card>
-
-
-            </div>
-        </section>
-    )
-}
+				{/* Bachelor's degree Course */}
+				<Card className="shadow-none">
+					<CardHeader className="pb-4">
+						<div className="flex items-start gap-4">
+							<div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-card">
+								<a
+									href="https://nahpi.cm/departments/computer"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="cursor-pointer transition-opacity hover:opacity-80"
+								>
+									<Image
+										src={ALL_LOGOS.nahpi}
+										alt="University of Bamenda Logo"
+										width={48}
+										height={48}
+										className="w-full h-full object-contain p-1"
+									/>
+								</a>
+							</div>
+							<div>
+								<a
+									href="https://nahpi.cm/departments/computer"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="hover:text-primary transition-colors"
+								>
+									<CardTitle>
+										Bachelor&apos;s degree: Computer
+										Engineering
+									</CardTitle>
+								</a>
+								<CardDescription>
+									<span className="block text-muted-foreground">
+										University of Bamenda
+									</span>
+									<span className="block text-sm text-muted-foreground">
+										Oct 2022 - Jun 2026
+									</span>
+								</CardDescription>
+							</div>
+						</div>
+					</CardHeader>
+				</Card>
+			</div>
+		</section>
+	);
+};
 
 export default EducationSection;

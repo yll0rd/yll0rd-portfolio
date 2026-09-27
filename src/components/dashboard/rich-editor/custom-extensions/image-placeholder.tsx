@@ -158,6 +158,7 @@ function ImagePlaceholderComponent(props: NodeViewProps) {
 
 			reader.onload = () => {
 				const src = reader.result as string;
+
 				editor.chain().focus().setImage({ src }).run();
 			};
 
@@ -171,16 +172,20 @@ function ImagePlaceholderComponent(props: NodeViewProps) {
 
 	const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const files = Array.from(e.target.files || []);
+
 		handleAcceptedFiles(files);
 	};
 
 	const handleInsertEmbed = (e: FormEvent) => {
 		e.preventDefault();
 		const valid = isValidUrl(url);
+
 		if (!valid) {
 			setUrlError(true);
+
 			return;
 		}
+
 		if (url !== "") {
 			editor.chain().focus().setImage({ src: url }).run();
 			extension.options.onEmbed(url, editor);
@@ -190,7 +195,10 @@ function ImagePlaceholderComponent(props: NodeViewProps) {
 	if (!editor.isEditable) return <NodeViewWrapper hidden />;
 
 	return (
-		<NodeViewWrapper className="w-full font-[family-name:var(--font-sans)]" contentEditable={false}>
+		<NodeViewWrapper
+			className="w-full font-[family-name:var(--font-sans)]"
+			contentEditable={false}
+		>
 			<Popover modal open={open} onOpenChange={setOpen}>
 				<PopoverTrigger
 					onClick={() => {
@@ -199,7 +207,9 @@ function ImagePlaceholderComponent(props: NodeViewProps) {
 					asChild
 					className="w-full"
 				>
-					<button type="button" disabled={!editor.isEditable}
+					<button
+						type="button"
+						disabled={!editor.isEditable}
 						className={cn(
 							"flex cursor-pointer items-center gap-3 rounded-md border border-dashed border-border bg-muted/40 p-4 text-sm text-accent-foreground transition-colors hover:bg-accent",
 							selected && "bg-primary/10 hover:bg-primary/20",
@@ -220,11 +230,17 @@ function ImagePlaceholderComponent(props: NodeViewProps) {
 				>
 					<Tabs defaultValue="upload" className="px-3">
 						<TabsList>
-							<TabsTrigger className="px-2 py-1 text-sm" value="upload">
+							<TabsTrigger
+								className="px-2 py-1 text-sm"
+								value="upload"
+							>
 								<Upload className="mr-2 h-4 w-4" />
 								Upload
 							</TabsTrigger>
-							<TabsTrigger className="px-2 py-1 text-sm" value="url">
+							<TabsTrigger
+								className="px-2 py-1 text-sm"
+								value="url"
+							>
 								<Link className="mr-2 h-4 w-4" />
 								Embed link
 							</TabsTrigger>
@@ -238,15 +254,18 @@ function ImagePlaceholderComponent(props: NodeViewProps) {
 								onDrop={handleDrop}
 								className={cn(
 									"my-2 rounded-md border border-dashed text-sm transition-colors",
-									isDragActive && "border-secondary bg-accent",
-									isDragReject && "border-destructive bg-destructive/10",
+									isDragActive &&
+										"border-secondary bg-accent",
+									isDragReject &&
+										"border-destructive bg-destructive/10",
 									"hover:bg-accent",
 								)}
 							>
 								<input
 									type="file"
 									accept={Object.keys(
-										extension.options.allowedMimeTypes || {},
+										extension.options.allowedMimeTypes ||
+											{},
 									).join(",")}
 									multiple={extension.options.maxFiles !== 1}
 									onChange={handleFileInputChange}
@@ -268,13 +287,14 @@ function ImagePlaceholderComponent(props: NodeViewProps) {
 									value={url}
 									onChange={(e) => {
 										setUrl(e.target.value);
+
 										if (urlError) {
 											setUrlError(false);
 										}
 									}}
 									aria-label="Image URL"
-                                    aria-invalid={urlError}
-                                    placeholder="Paste the image link..."
+									aria-invalid={urlError}
+									placeholder="Paste the image link..."
 								/>
 								{urlError && (
 									<p className="py-1.5 text-xs text-destructive">

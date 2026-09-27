@@ -18,7 +18,7 @@ import {
 	CharacterCount,
 } from "novel";
 import { Youtube } from "@tiptap/extension-youtube";
-import { type HeadingOptions } from "@tiptap/extension-heading"
+import { type HeadingOptions } from "@tiptap/extension-heading";
 
 import { cx } from "class-variance-authority";
 import { Typography } from "@tiptap/extension-typography";
@@ -26,18 +26,19 @@ import GlobalDragHandle from "tiptap-extension-global-drag-handle";
 import AutoJoiner from "tiptap-extension-auto-joiner"; // optional
 import { Subscript } from "@tiptap/extension-subscript";
 import { Superscript } from "@tiptap/extension-superscript";
-import TableCell from '@tiptap/extension-table-cell'
-import TableHeader from '@tiptap/extension-table-header'
-import TableRow from '@tiptap/extension-table-row';
-import { Markdown } from 'tiptap-markdown';
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import TableRow from "@tiptap/extension-table-row";
+import { Markdown } from "tiptap-markdown";
 import { slugify } from "@/lib/utils";
 import { mergeAttributes, Node, textblockTypeInputRule } from "@tiptap/core";
-import { createLowlight, all } from 'lowlight';
+import { createLowlight, all } from "lowlight";
 import { TableExtension as Table } from "./custom-extensions/table";
 import { ImageExtension } from "./custom-extensions/image";
 import { ImagePlaceholder } from "./custom-extensions/image-placeholder";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 import CodeBlockComponent from "./custom-extensions/enhanced-codeblock";
+
 const aiHighlight = AIHighlight;
 const placeholder = Placeholder.configure({
 	placeholder: "Start typing here...",
@@ -46,7 +47,7 @@ const placeholder = Placeholder.configure({
 const tiptapLink = TiptapLink.configure({
 	HTMLAttributes: {
 		class: cx(
-			"text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer"
+			"text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer",
 		),
 	},
 });
@@ -85,7 +86,7 @@ const tableConfigs = [
 	TableRow,
 	TableHeader,
 	TableCell,
-]
+];
 
 const updatedImage = UpdatedImage.configure({
 	HTMLAttributes: {
@@ -119,31 +120,31 @@ const horizontalRule = HorizontalRule.configure({
 
 const highlightExtension = HighlightExtension.configure({
 	multicolor: true,
-})
+});
 // create a lowlight instance with all languages loaded
-const lowlight = createLowlight(all)
+const lowlight = createLowlight(all);
 const codeBlockLowlight = CodeBlockLowlight.extend({
 	addNodeView() {
 		return ReactNodeViewRenderer(CodeBlockComponent);
-	}
+	},
 }).configure({
 	lowlight,
-	defaultLanguage: 'javascript',
-})
+	defaultLanguage: "javascript",
+});
 
 const CustomHeading = Node.create<HeadingOptions>({
-	name: 'heading',
+	name: "heading",
 
 	addOptions() {
 		return {
 			levels: [1, 2, 3, 4, 5, 6],
 			HTMLAttributes: {},
-		}
+		};
 	},
 
-	content: 'inline*',
+	content: "inline*",
 
-	group: 'block',
+	group: "block",
 
 	defining: true,
 
@@ -156,81 +157,99 @@ const CustomHeading = Node.create<HeadingOptions>({
 			id: {
 				default: null,
 				rendered: true,
-				parseHTML: element => element.getAttribute('id'),
-				renderHTML: attributes => {
+				parseHTML: (element) => element.getAttribute("id"),
+				renderHTML: (attributes) => {
 					if (!attributes.id) {
-						return {}
+						return {};
 					}
-					return { id: attributes.id }
+
+					return { id: attributes.id };
 				},
 			},
-		}
+		};
 	},
 
 	parseHTML() {
-		return this.options.levels
-			.map((level: (1 | 2 | 3 | 4 | 5 | 6)) => ({
-				tag: `h${level}`,
-				attrs: { level },
-			}))
+		return this.options.levels.map((level: 1 | 2 | 3 | 4 | 5 | 6) => ({
+			tag: `h${level}`,
+			attrs: { level },
+		}));
 	},
 
 	renderHTML({ node, HTMLAttributes }) {
 		// Get text content from the node
-		const text = node.content.content
-			.map(n => n.text || '')
-			.join('')
+		const text = node.content.content.map((n) => n.text || "").join("");
 
 		// Generate slug from text
-		const id = slugify(text)
+		const id = slugify(text);
 
-		const level = node.attrs.level
-		const hasLevel = this.options.levels.includes(level)
-		const tag = `h${hasLevel ? level : this.options.levels[0]}`
+		const level = node.attrs.level;
+		const hasLevel = this.options.levels.includes(level);
+		const tag = `h${hasLevel ? level : this.options.levels[0]}`;
 
-		return [tag, mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, { id }), 0]
+		return [
+			tag,
+			mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+				id,
+			}),
+			0,
+		];
 	},
 
 	addCommands() {
 		return {
-			setHeading: attributes => ({ commands }) => {
-				if (!this.options.levels.includes(attributes.level)) {
-					return false
-				}
+			setHeading:
+				(attributes) =>
+				({ commands }) => {
+					if (!this.options.levels.includes(attributes.level)) {
+						return false;
+					}
 
-				return commands.setNode(this.name, attributes)
-			},
-			toggleHeading: attributes => ({ commands }) => {
-				if (!this.options.levels.includes(attributes.level)) {
-					return false
-				}
+					return commands.setNode(this.name, attributes);
+				},
+			toggleHeading:
+				(attributes) =>
+				({ commands }) => {
+					if (!this.options.levels.includes(attributes.level)) {
+						return false;
+					}
 
-				return commands.toggleNode(this.name, 'paragraph', attributes)
-			},
-		}
+					return commands.toggleNode(
+						this.name,
+						"paragraph",
+						attributes,
+					);
+				},
+		};
 	},
 
 	addKeyboardShortcuts() {
-		return this.options.levels.reduce((items, level) => ({
-			...items,
-			...{
-				[`Mod-Alt-${level}`]: () => this.editor.commands.toggleHeading({ level }),
-			},
-		}), {})
+		return this.options.levels.reduce(
+			(items, level) => ({
+				...items,
+				...{
+					[`Mod-Alt-${level}`]: () =>
+						this.editor.commands.toggleHeading({ level }),
+				},
+			}),
+			{},
+		);
 	},
 
 	addInputRules() {
-		return this.options.levels.map(level => {
+		return this.options.levels.map((level) => {
 			return textblockTypeInputRule({
-				find: new RegExp(`^(#{${Math.min(...this.options.levels)},${level}})\\s$`),
+				find: new RegExp(
+					`^(#{${Math.min(...this.options.levels)},${level}})\\s$`,
+				),
 				type: this.type,
 				getAttributes: {
 					level,
 				},
-			})
-		})
+			});
+		});
 	},
-})
+});
 
 const starterKit = StarterKit.configure({
 	heading: false,
@@ -280,7 +299,6 @@ const mathematics = Mathematics.configure({
 
 const characterCount = CharacterCount.configure();
 
-
 export const defaultExtensions = [
 	starterKit,
 	CustomHeading.configure({
@@ -293,8 +311,10 @@ export const defaultExtensions = [
 		addProseMirrorPlugins() {
 			return [
 				UploadImagesPlugin({
-					imageClass: cx("opacity-40 rounded-lg border border-border"),
-				})
+					imageClass: cx(
+						"opacity-40 rounded-lg border border-border",
+					),
+				}),
 			];
 		},
 	}).configure({
