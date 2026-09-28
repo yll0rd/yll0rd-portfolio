@@ -3,13 +3,12 @@
 import { Image } from "@tiptap/extension-image";
 
 import {
-	NodeViewContent,
 	type NodeViewProps,
 	NodeViewWrapper,
 	ReactNodeViewRenderer,
 } from "@tiptap/react";
 import { AlignCenter, AlignLeft, AlignRight, Trash } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -36,6 +35,14 @@ export const ImageExtension = Image.extend({
 			align: {
 				default: "center",
 			},
+			caption: {
+				default: null,
+				parseHTML: (element) => element.getAttribute("data-caption"),
+				renderHTML: (attributes) =>
+					attributes.caption
+						? { "data-caption": attributes.caption }
+						: {},
+			},
 		};
 	},
 
@@ -45,9 +52,12 @@ export const ImageExtension = Image.extend({
 });
 
 function TiptapImage(props: NodeViewProps) {
-	const { node, editor, selected, deleteNode, updateAttributes } = props;
+	const { node, editor, selected, deleteNode, updateAttributes, getPos } =
+		props;
 	const imageRef = useRef<HTMLImageElement | null>(null);
-	const nodeRef = useRef<HTMLDivElement | null>(null);
+	const nodeRef = useRef<HTMLElement | null>(null);
+	const captionRef = useRef<HTMLTextAreaElement | null>(null);
+	const caption: string = node.attrs.caption ?? "";
 	const [resizing, setResizing] = useState(false);
 	const [resizingPosition, setResizingPosition] = useState<"left" | "right">(
 		"left",
@@ -148,6 +158,35 @@ function TiptapImage(props: NodeViewProps) {
 		setResizeInitialWidth(0);
 	}
 
+	function handleCaptionKeyDown(
+		event: React.KeyboardEvent<HTMLTextAreaElement>,
+	) {
+		// Captions stay on one line; Enter returns to writing below the image.
+		if (event.key !== "Enter") {
+			return;
+		}
+
+		event.preventDefault();
+
+		const position = getPos();
+
+		if (typeof position === "number") {
+			editor.commands.focus(position + node.nodeSize);
+		}
+	}
+
+	// Grow the caption field with its text instead of scrolling inside it.
+	useLayoutEffect(() => {
+		const field = captionRef.current;
+
+		if (!field) {
+			return;
+		}
+
+		field.style.height = "auto";
+		field.style.height = `${field.scrollHeight}px`;
+	}, [caption, node.attrs.width]);
+
 	useEffect(() => {
 		// Mouse events
 		window.addEventListener("mousemove", resize);
@@ -172,6 +211,7 @@ function TiptapImage(props: NodeViewProps) {
 
 	return (
 		<NodeViewWrapper
+			as="figure"
 			ref={nodeRef}
 			className={cn(
 				"relative flex flex-col rounded-md border-2 border-transparent",
@@ -182,12 +222,7 @@ function TiptapImage(props: NodeViewProps) {
 			)}
 			style={{ width: node.attrs.width }}
 		>
-			<div
-				className={cn(
-					"group relative flex flex-col rounded-md",
-					resizing && "",
-				)}
-			>
+			<div className="group relative flex flex-col rounded-md">
 				<img
 					ref={imageRef}
 					src={node.attrs.src}
@@ -195,12 +230,6 @@ function TiptapImage(props: NodeViewProps) {
 					title={node.attrs.title}
 					className="not-prose"
 				/>
-				<NodeViewContent<"figcaption">
-					as="figcaption"
-					className="text-center not-prose font-[family-name:var(--font-sans)] text-xs text-muted-foreground"
-				>
-					{node.attrs.title}
-				</NodeViewContent>
 
 				{editor?.isEditable && !!imageRef.current && (
 					<>
@@ -331,6 +360,34 @@ function TiptapImage(props: NodeViewProps) {
 					</>
 				)}
 			</div>
+
+			{editor?.isEditable ? (
+				<figcaption className="not-prose mt-2">
+					<textarea
+						ref={captionRef}
+						rows={1}
+						value={caption}
+						placeholder="Add a caption (optional)"
+						aria-label="Image caption"
+						spellCheck
+						onChange={(event) => {
+							updateAttributes({
+								caption:
+									event.target.value.replace(/\n/g, " ") ||
+									null,
+							});
+						}}
+						onKeyDown={handleCaptionKeyDown}
+						className="block w-full resize-none overflow-hidden rounded-sm border-b border-transparent bg-transparent px-1 py-1 text-center font-[family-name:var(--font-sans)] text-sm leading-relaxed text-muted-foreground transition-colors placeholder:text-muted-foreground/60 hover:border-border focus:border-secondary"
+					/>
+				</figcaption>
+			) : (
+				caption && (
+					<figcaption className="not-prose mt-2 px-1 text-center font-[family-name:var(--font-sans)] text-sm leading-relaxed text-muted-foreground">
+						{caption}
+					</figcaption>
+				)
+			)}
 		</NodeViewWrapper>
 	);
 }
