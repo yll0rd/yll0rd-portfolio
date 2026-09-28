@@ -106,6 +106,8 @@ Published articles and previews use the shared rich editor in `notEditable` mode
 
 Heading IDs and TOC links must agree, including duplicate titles and headings containing formatted text. Preserve deep links and keyboard navigation when changing the reader layout.
 
+Reader comments sit below the article in the same 800px column. Comment text uses Newsreader like the article; names, dates, and controls use IBM Plex Sans. Replies (at most two levels) hang from a thin brass rule, echoing article blockquotes. Leo’s own comments carry a small brass “Author” label. Deleted and hidden comments stay in place as an italic placeholder so replies keep their context. Sign-in with Google lives inside the comments section itself, never on a separate page.
+
 ## Workflow for future agents
 
 1. Read this guide and `AGENTS.md`, then inspect the affected active route and nearby shared components.

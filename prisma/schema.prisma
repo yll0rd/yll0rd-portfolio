@@ -57,6 +57,93 @@ model Blog {
   publishedAt      DateTime?
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
+  comments         Comment[]
 
   @@index([status, publishedAt])
+}
+
+// Reader accounts are managed by Better Auth (Google sign-in) and are kept
+// separate from the admin User and Session models above.
+model Reader {
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  email         String          @unique
+  emailVerified Boolean         @default(false)
+  image         String?
+  banned        Boolean         @default(false)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  sessions      ReaderSession[]
+  accounts      ReaderAccount[]
+  comments      Comment[]
+}
+
+model ReaderSession {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String   @db.ObjectId
+  user      Reader   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model ReaderAccount {
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  accountId             String
+  providerId            String
+  userId                String    @db.ObjectId
+  user                  Reader    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model Verification {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+}
+
+enum CommentStatus {
+  VISIBLE
+  HIDDEN
+  DELETED
+}
+
+model Comment {
+  id        String        @id @default(auto()) @map("_id") @db.ObjectId
+  blogId    String        @db.ObjectId
+  blog      Blog          @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  readerId  String?       @db.ObjectId
+  reader    Reader?       @relation(fields: [readerId], references: [id], onDelete: SetNull)
+  adminId   String?       @db.ObjectId
+  parentId  String?       @db.ObjectId
+  depth     Int           @default(0)
+  body      String
+  status    CommentStatus @default(VISIBLE)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([blogId, status, createdAt])
+  @@index([parentId])
+  @@index([readerId, createdAt])
+  @@index([adminId, createdAt])
 }

@@ -17,6 +17,7 @@ import {
 const routes = [
 	["/dashboard", "Overview"],
 	["/dashboard/posts", "Posts"],
+	["/dashboard/comments", "Comments"],
 ];
 
 export default function DashboardShell({

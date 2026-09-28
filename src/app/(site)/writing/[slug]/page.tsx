@@ -7,6 +7,10 @@ import type { PublishedPost } from "@/lib/blog-content";
 import Article from "@/components/blog/article";
 import TableOfContents from "@/components/blog/table-of-contents";
 import { prepareArticleHeadings } from "@/lib/article-headings";
+import Comments, { type CommentViewer } from "@/components/blog/comments";
+import { getAdmin } from "@/lib/auth";
+import { getReader, readerAuthConfigured } from "@/lib/reader-auth";
+import { commentAuthorName, commentThread, type Viewer } from "@/lib/comments";
 
 export const dynamic = "force-dynamic";
 
@@ -58,6 +62,25 @@ export default async function ArticlePage({
 	if (!row?.published) notFound();
 	const post = row.published as unknown as PublishedPost;
 	const { content, headings } = prepareArticleHeadings(post.content);
+	const enabled = readerAuthConfigured();
+	const admin = await getAdmin();
+	const reader = admin || !enabled ? null : await getReader();
+	const viewer: Viewer = admin
+		? { kind: "admin", id: admin.id }
+		: reader
+			? { kind: "reader", id: reader.id, banned: reader.banned }
+			: null;
+	const thread = await commentThread(row.id, viewer);
+	const commentViewer: CommentViewer = admin
+		? { kind: "admin", name: commentAuthorName }
+		: reader
+			? {
+					kind: "reader",
+					name: reader.name,
+					image: reader.image,
+					banned: reader.banned,
+				}
+			: null;
 
 	return (
 		<div className="site-width py-12 sm:py-20">
@@ -85,6 +108,13 @@ export default async function ArticlePage({
 					<Article
 						post={{ ...post, content }}
 						date={row.publishedAt}
+					/>
+					<Comments
+						slug={row.slug}
+						comments={thread.comments}
+						count={thread.count}
+						viewer={commentViewer}
+						enabled={enabled}
 					/>
 				</div>
 			</div>

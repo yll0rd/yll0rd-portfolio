@@ -37,6 +37,6 @@ export async function publishedPost(slug: string) {
 
 	return db.blog.findFirst({
 		where: { slug, status: "PUBLISHED" },
-		select: { slug: true, published: true, publishedAt: true },
+		select: { id: true, slug: true, published: true, publishedAt: true },
 	});
 }
