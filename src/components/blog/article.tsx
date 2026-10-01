@@ -3,7 +3,7 @@ import {
 	readingMinutes,
 	safeImage,
 } from "@/lib/blog-content";
-import RichEditor from "@/components/dashboard/rich-editor";
+import ArticleContent from "@/components/blog/article-content";
 
 export default function Article({
 	post,
@@ -55,7 +55,7 @@ export default function Article({
 					className="mb-12 max-h-[520px] w-full rounded-md object-cover"
 				/>
 			)}
-			<RichEditor initialContent={post.content} notEditable />
+			<ArticleContent content={post.content} />
 		</article>
 	);
 }

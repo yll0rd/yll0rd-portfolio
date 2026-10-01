@@ -1,7 +1,5 @@
 "use client";
 
-import { Image } from "@tiptap/extension-image";
-
 import {
 	type NodeViewProps,
 	NodeViewWrapper,
@@ -13,39 +11,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { ImageBase } from "./image-base";
 
-export const ImageExtension = Image.extend({
-	addAttributes() {
-		return {
-			src: {
-				default: null,
-			},
-			alt: {
-				default: null,
-			},
-			title: {
-				default: null,
-			},
-			width: {
-				default: "100%",
-			},
-			height: {
-				default: null,
-			},
-			align: {
-				default: "center",
-			},
-			caption: {
-				default: null,
-				parseHTML: (element) => element.getAttribute("data-caption"),
-				renderHTML: (attributes) =>
-					attributes.caption
-						? { "data-caption": attributes.caption }
-						: {},
-			},
-		};
-	},
-
+export const ImageExtension = ImageBase.extend({
 	addNodeView: () => {
 		return ReactNodeViewRenderer(TiptapImage);
 	},

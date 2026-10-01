@@ -52,6 +52,7 @@
 		"@tiptap/pm": "3.31.3",
 		"@tiptap/react": "3.31.3",
 		"@tiptap/starter-kit": "3.31.3",
+		"@tiptap/static-renderer": "3.31.3",
 		"@tiptap/suggestion": "3.31.3",
 		"@tsparticles/engine": "^3.8.1",
 		"@tsparticles/react": "^3.0.0",
