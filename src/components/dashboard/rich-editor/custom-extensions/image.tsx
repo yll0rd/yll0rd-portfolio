@@ -214,11 +214,12 @@ function TiptapImage(props: NodeViewProps) {
 			as="figure"
 			ref={nodeRef}
 			className={cn(
-				"relative flex flex-col rounded-md border-2 border-transparent",
+				// Saved widths are pixels from a wide editor; cap them to the column.
+				"relative flex max-w-full flex-col rounded-md border-2 border-transparent",
 				selected ? "border-secondary" : "",
-				node.attrs.align === "left" && "left-0 -translate-x-0",
-				node.attrs.align === "center" && "left-1/2 -translate-x-1/2",
-				node.attrs.align === "right" && "left-full -translate-x-full",
+				node.attrs.align === "left" && "mr-auto",
+				node.attrs.align === "center" && "mx-auto",
+				node.attrs.align === "right" && "ml-auto",
 			)}
 			style={{ width: node.attrs.width }}
 		>
@@ -228,7 +229,7 @@ function TiptapImage(props: NodeViewProps) {
 					src={node.attrs.src}
 					alt={node.attrs.alt}
 					title={node.attrs.title}
-					className="not-prose"
+					className="not-prose block h-auto w-full max-w-full"
 				/>
 
 				{editor?.isEditable && !!imageRef.current && (
@@ -265,7 +266,7 @@ function TiptapImage(props: NodeViewProps) {
 						</div>
 						<div
 							className={cn(
-								"absolute right-4 top-4 flex items-center gap-1 rounded-md border bg-background p-1 opacity-0 transition-opacity font-[family-name:var(--font-sans)] text-foreground",
+								"absolute right-2 top-2 flex items-center gap-1 rounded-md border bg-background p-1 opacity-0 transition-opacity font-[family-name:var(--font-sans)] text-foreground",
 								!resizing && "group-hover:opacity-100",
 							)}
 						>
