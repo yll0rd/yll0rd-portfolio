@@ -131,7 +131,8 @@ function ViewerPanel({
 			});
 
 			if (error) throw error;
-		} catch {
+		} catch (error) {
+			console.error(error);
 			setError("Could not reach Google. Try again.");
 			setBusy(false);
 		}
