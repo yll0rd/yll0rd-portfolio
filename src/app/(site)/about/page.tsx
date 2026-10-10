@@ -34,7 +34,7 @@ export default function AboutPage() {
 						behind it.
 					</p>
 					<a
-						href="https://drive.google.com/file/d/1z8IWwn6kJray4w6N3kn0MIUb8myFj_At/view?usp=sharing"
+						href="https://drive.google.com/file/d/1gfbaTJ87FG1_eCTJ7NAlybkQT-35XjfH/view?usp=drive_link"
 						target="_blank"
 						rel="noopener noreferrer"
 						className="text-link"

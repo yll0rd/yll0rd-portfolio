@@ -19,7 +19,7 @@ const HeroSection = ({ className = "" }: { className?: string }) => {
 	const handleDownloadResume = () => {
 		// Update this path to your actual resume file
 		const resumeUrl =
-			"https://drive.google.com/file/d/1z8IWwn6kJray4w6N3kn0MIUb8myFj_At/view?usp=sharing";
+			"https://drive.google.com/file/d/1gfbaTJ87FG1_eCTJ7NAlybkQT-35XjfH/view?usp=drive_link";
 		const link = document.createElement("a");
 
 		link.href = resumeUrl;
